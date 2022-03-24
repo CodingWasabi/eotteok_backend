@@ -12,7 +12,7 @@ public class AccountController {
 
 	@GetMapping("/my/profile")
 	public GetMyProfileResponse getMyProfile() {
-		return new GetMyProfileResponse("nickname");
+		return new GetMyProfileResponse(1L, "nickname");
 	}
 	
 	@PutMapping("/my/profile")

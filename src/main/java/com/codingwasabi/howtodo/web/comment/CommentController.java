@@ -24,7 +24,7 @@ public class CommentController {
 		return new GetCommentsByUserIdResponse(commentResponses);
 	}
 	
-	@PostMapping("/survey/{userId}/comments/{targetDate}")
+	@PostMapping("/survey/{userId}/result/comments/{targetDate}")
 	public CreateCommentsResponse createComments() {
 		return new CreateCommentsResponse(1L);
 	}

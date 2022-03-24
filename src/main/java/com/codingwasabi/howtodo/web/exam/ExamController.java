@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codingwasabi.howtodo.web.exam.dto.GetMyExamResponse;
+import com.codingwasabi.howtodo.web.exam.dto.PutMyExamResponse;
 
 @RestController
 public class ExamController {
@@ -29,6 +31,12 @@ public class ExamController {
 		);
 		
 		return new GetMyExamResponse(subjectResponses);
+	}
+	
+	@PutMapping("/my/exams")
+	public PutMyExamResponse putMyExam() {
+		
+		return new PutMyExamResponse(4);
 	}
 	
 }
