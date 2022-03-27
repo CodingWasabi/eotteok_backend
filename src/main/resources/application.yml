@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    include: env
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    
+server:
+  servlet:
+    session:
+      timeout: 15m
+      cookie:
+        http-only: true
+        secure: true
+        domain: localhost # 변경 해야함
+        same-site: lax
