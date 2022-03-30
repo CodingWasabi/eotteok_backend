@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
 import lombok.NoArgsConstructor;
@@ -21,6 +24,18 @@ public class Calender {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "calender", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "calender", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DailyPlan> dailyPlans = new ArrayList<>();
+
+	@OneToOne(fetch = FetchType.LAZY)
+	private Account account;
+
+	public Calender(Account account) {
+		this.account = account;
+	}
+
+	public void addPlan(DailyPlan dailyPlan) {
+		dailyPlans.add(dailyPlan);
+		dailyPlan.setCalender(this);
+	}
 }

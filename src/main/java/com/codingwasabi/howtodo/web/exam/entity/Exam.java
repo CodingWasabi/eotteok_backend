@@ -14,6 +14,7 @@ import com.codingwasabi.howtodo.web.subject.entity.Subject;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -28,11 +29,13 @@ public class Exam {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Subject subject;
 
+	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
-	private DailyPlan plan;
+	private DailyPlan dailyPlan;
 
 	@Builder
-	private Exam(double hour) {
+	private Exam(double hour, Subject subject) {
 		this.hour = hour;
+		this.subject = subject;
 	}
 }
