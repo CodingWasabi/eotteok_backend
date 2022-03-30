@@ -18,6 +18,7 @@ import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -42,6 +43,12 @@ public class DailyPlan {
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Calender calender;
+
+	@Builder
+	private DailyPlan(Account account, LocalDate date) {
+		this.account = account;
+		this.date = date;
+	}
 
 	public void addExam(Exam exam) {
 		exams.add(exam);

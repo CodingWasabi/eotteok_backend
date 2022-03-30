@@ -15,9 +15,11 @@ import javax.persistence.OneToOne;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Calender {
 	@Id
