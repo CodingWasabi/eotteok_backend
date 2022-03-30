@@ -1,5 +1,6 @@
 package com.codingwasabi.howtodo.web.subject.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -36,5 +37,10 @@ public class Subject {
 		this.name = name;
 		this.dateTime = dateTime;
 		this.studyDegree = studyDegree;
+	}
+
+	public int getDDay(LocalDate today) {
+		return today.until(dateTime.toLocalDate())
+					.getDays();
 	}
 }
