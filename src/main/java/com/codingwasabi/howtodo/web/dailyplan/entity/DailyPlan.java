@@ -61,4 +61,8 @@ public class DailyPlan {
 		comments.add(comment);
 		comment.setDailyPlan(this);
 	}
+
+	public void fillSubject(Set<Subject> subjects) {
+		exams.forEach(exam -> subjects.add(exam.getSubject()));
+	}
 }

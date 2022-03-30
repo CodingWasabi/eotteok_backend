@@ -1,7 +1,9 @@
 package com.codingwasabi.howtodo.web.calender.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
+import com.codingwasabi.howtodo.web.subject.entity.Subject;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,5 +42,12 @@ public class Calender {
 	public void addPlan(DailyPlan dailyPlan) {
 		dailyPlans.add(dailyPlan);
 		dailyPlan.setCalender(this);
+	}
+
+	public Set<Subject> getSubjects() {
+		Set<Subject> subjects = new HashSet<>();
+		dailyPlans.forEach(plan -> plan.fillSubject(subjects));
+
+		return subjects;
 	}
 }
