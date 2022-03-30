@@ -12,7 +12,7 @@ import com.codingwasabi.howtodo.web.comment.dto.GetCommentsByUserIdResponse;
 
 @RestController
 public class CommentController {
-	
+
 	@GetMapping("/survey/{userId}/result/comments/{targetDate}")
 	public GetCommentsByUserIdResponse getCommentsByUserId() {
 		List<GetCommentsByUserIdResponse.CommentResponse> commentResponses = new ArrayList<>();
@@ -20,13 +20,13 @@ public class CommentController {
 		commentResponses.add(new GetCommentsByUserIdResponse.CommentResponse(2, "nickname2", "body2"));
 		commentResponses.add(new GetCommentsByUserIdResponse.CommentResponse(3, "nickname3", "body3"));
 		commentResponses.add(new GetCommentsByUserIdResponse.CommentResponse(4, "nickname4", "body4"));
-		
+
 		return new GetCommentsByUserIdResponse(commentResponses);
 	}
-	
+
 	@PostMapping("/survey/{userId}/result/comments/{targetDate}")
 	public CreateCommentsResponse createComments() {
 		return new CreateCommentsResponse(1L);
 	}
-	
+
 }

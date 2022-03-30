@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.survery.dto;
+package com.codingwasabi.howtodo.web.plan.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,10 +14,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetMySurveyResponse {
+public class GetPlanByUserIdResponse {
+	private String nickname;
 	private int tendency;
 	private List<DateInfoResponse> calendar;
-	
+
 	@Getter
 	@Setter
 	@AllArgsConstructor
@@ -26,7 +27,7 @@ public class GetMySurveyResponse {
 		private LocalDate date;
 		private int commentCount;
 		private List<SubjectResponse> subjects;
-		
+
 		@Getter
 		@Setter
 		@AllArgsConstructor

@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetCommentsByUserIdResponse {
-	
+
 	List<CommentResponse> comments;
-	
+
 	@Getter
 	@Setter
 	@AllArgsConstructor
@@ -26,5 +26,5 @@ public class GetCommentsByUserIdResponse {
 		private String nickname;
 		private String body;
 	}
-	
+
 }

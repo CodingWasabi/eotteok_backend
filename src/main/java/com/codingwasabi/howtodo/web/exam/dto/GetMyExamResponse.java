@@ -14,9 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetMyExamResponse {
-	
+
 	List<SubjectResponse> subjects;
-	
+
 	@Getter
 	@Setter
 	@AllArgsConstructor

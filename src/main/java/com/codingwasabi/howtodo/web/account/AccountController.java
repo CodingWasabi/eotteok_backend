@@ -14,7 +14,7 @@ public class AccountController {
 	public GetMyProfileResponse getMyProfile() {
 		return new GetMyProfileResponse(1L, "nickname");
 	}
-	
+
 	@PutMapping("/my/profile")
 	public PutMyProfileResponse putMyProfile() {
 		return new PutMyProfileResponse(1L);
