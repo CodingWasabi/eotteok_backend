@@ -45,7 +45,7 @@ public class DailyPlanTest {
 									   .date(LocalDate.now())
 									   .account(account)
 									   .build();
-		Exam exam = Exam_생성();
+		Exam exam = Exam_생성("물리");
 
 		// when
 		dailyPlan.addExam(exam);

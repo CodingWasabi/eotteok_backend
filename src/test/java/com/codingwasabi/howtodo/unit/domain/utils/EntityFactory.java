@@ -19,18 +19,18 @@ public class EntityFactory {
 					  .build();
 	}
 
-	public static Exam Exam_생성() {
+	public static Exam Exam_생성(String 과목명) {
 		return Exam.builder()
 				   .hour(2.5)
-				   .subject(Subject_생성())
+				   .subject(Subject_생성(과목명))
 				   .build();
 	}
 
-	public static Subject Subject_생성() {
+	public static Subject Subject_생성(String 과목명) {
 		return Subject.builder()
 					  .account(Account_생성())
 					  .dateTime(LocalDateTime.now())
-					  .name("과목명")
+					  .name(과목명)
 					  .studyDegree(3)
 					  .build();
 	}

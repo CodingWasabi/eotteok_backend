@@ -16,7 +16,7 @@ public class ExamTest {
 	@Test
 	void Exam_생성() {
 		// given
-		Subject subject = EntityFactory.Subject_생성();
+		Subject subject = EntityFactory.Subject_생성("물리");
 
 		// when
 		Exam exam = Exam.builder()
