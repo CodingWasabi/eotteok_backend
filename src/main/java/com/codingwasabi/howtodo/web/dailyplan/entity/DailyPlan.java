@@ -19,10 +19,12 @@ import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class DailyPlan {
 	@Id
