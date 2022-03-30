@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.plan.dto;
+package com.codingwasabi.howtodo.web.calender.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,8 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetPlanByUserIdResponse {
-	private String nickname;
+public class GetMyCalenderResponse {
 	private int tendency;
 	private List<DateInfoResponse> calendar;
 

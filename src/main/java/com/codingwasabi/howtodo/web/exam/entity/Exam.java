@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.codingwasabi.howtodo.web.plan.entity.Plan;
+import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.subject.entity.Subject;
 
 import lombok.Builder;
@@ -29,7 +29,7 @@ public class Exam {
 	private Subject subject;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Plan plan;
+	private DailyPlan plan;
 
 	@Builder
 	private Exam(double hour) {

@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.codingwasabi.howtodo.web.plan.entity.Plan;
+import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -41,7 +41,7 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	@Builder.Default
-	private List<Plan> plans = new ArrayList<>();
+	private List<DailyPlan> plans = new ArrayList<>();
 
 	@Builder
 	private Account(Long oauthId, String email, String ageRange, String birthday, String provider, String gender) {

@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.plan.entity;
+package com.codingwasabi.howtodo.web.dailyplan.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-public class Plan {
+public class DailyPlan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -35,4 +36,7 @@ public class Plan {
 
 	@OneToMany(mappedBy = "plan")
 	private List<Comment> comments = new ArrayList<>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Calender calender;
 }
