@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.codingwasabi.howtodo.web.exam.entity.Exam;
+import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 import com.codingwasabi.howtodo.web.subject.entity.Subject;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -74,7 +74,7 @@ public class CreateCalenderResponse {
 			private String name;
 			private double hour;
 
-			public static TodoInfo from(Exam todo) {
+			public static TodoInfo from(ToDo todo) {
 				return new TodoInfo(todo.getSubject()
 										.getName(), todo.getHour());
 			}

@@ -75,7 +75,7 @@ public class CalenderController {
 	}
 
 	private List<CreateCalenderResponse.DateInfo.TodoInfo> convertTodoDto(DailyPlan plan) {
-		return plan.getExams()
+		return plan.getToDos()
 				   .stream()
 				   .map(CreateCalenderResponse.DateInfo.TodoInfo::from)
 				   .collect(Collectors.toList());

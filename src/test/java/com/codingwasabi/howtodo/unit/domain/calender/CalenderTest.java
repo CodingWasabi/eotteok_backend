@@ -63,8 +63,8 @@ public class CalenderTest {
 									   .account(account)
 									   .date(LocalDate.now())
 									   .build();
-		dailyPlan.addExam(Exam_생성("물리"));
-		dailyPlan.addExam(Exam_생성("수학"));
+		dailyPlan.addToDo(ToDo_생성("물리"));
+		dailyPlan.addToDo(ToDo_생성("수학"));
 
 		Calender calender = new Calender(account);
 		calender.addPlan(dailyPlan);

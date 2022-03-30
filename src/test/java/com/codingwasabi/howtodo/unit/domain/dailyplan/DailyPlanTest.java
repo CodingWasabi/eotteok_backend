@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.exam.entity.Exam;
+import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 import com.codingwasabi.howtodo.web.subject.entity.Subject;
 
 @DisplayName("DailyPlan, 도메인 단위 테스트")
@@ -43,13 +43,13 @@ public class DailyPlanTest {
 	@Test
 	void 시험_추가() {
 		// given
-		Exam exam = Exam_생성("물리");
+		ToDo todo = ToDo_생성("물리");
 
 		// when
-		dailyPlan.addExam(exam);
+		dailyPlan.addToDo(todo);
 
 		// then
-		assertThat(dailyPlan.getExams()).containsOnly(exam);
+		assertThat(dailyPlan.getToDos()).containsOnly(todo);
 	}
 
 	@DisplayName("댓글 추가")
@@ -70,10 +70,10 @@ public class DailyPlanTest {
 	void 과목_채우기() {
 		// given
 		Set<Subject> subjects = new HashSet<>();
-		Exam 물리 = Exam_생성("물리");
-		Exam 수학 = Exam_생성("수학");
-		dailyPlan.addExam(물리);
-		dailyPlan.addExam(수학);
+		ToDo 물리 = ToDo_생성("물리");
+		ToDo 수학 = ToDo_생성("수학");
+		dailyPlan.addToDo(물리);
+		dailyPlan.addToDo(수학);
 
 		// when
 		dailyPlan.fillSubject(subjects);

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
-import com.codingwasabi.howtodo.web.exam.entity.Exam;
+import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 import com.codingwasabi.howtodo.web.subject.entity.Subject;
 
 public class EntityFactory {
@@ -19,8 +19,8 @@ public class EntityFactory {
 					  .build();
 	}
 
-	public static Exam Exam_생성(String 과목명) {
-		return Exam.builder()
+	public static ToDo ToDo_생성(String 과목명) {
+		return ToDo.builder()
 				   .hour(2.5)
 				   .subject(Subject_생성(과목명))
 				   .build();

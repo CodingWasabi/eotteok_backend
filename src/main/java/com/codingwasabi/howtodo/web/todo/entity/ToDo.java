@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.exam.entity;
+package com.codingwasabi.howtodo.web.todo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Exam {
+public class ToDo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -34,7 +34,7 @@ public class Exam {
 	private DailyPlan dailyPlan;
 
 	@Builder
-	private Exam(double hour, Subject subject) {
+	private ToDo(double hour, Subject subject) {
 		this.hour = hour;
 		this.subject = subject;
 	}

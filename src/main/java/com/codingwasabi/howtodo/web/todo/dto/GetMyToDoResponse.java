@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.exam.dto;
+package com.codingwasabi.howtodo.web.todo.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetMyExamResponse {
+public class GetMyToDoResponse {
 
 	List<SubjectResponse> subjects;
 

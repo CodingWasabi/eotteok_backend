@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.exam.dto;
+package com.codingwasabi.howtodo.web.todo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PutMyExamResponse {
+public class PutMyToDoResponse {
 	private int count;
 }
