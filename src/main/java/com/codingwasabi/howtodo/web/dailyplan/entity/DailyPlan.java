@@ -3,6 +3,7 @@ package com.codingwasabi.howtodo.web.dailyplan.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
+import com.codingwasabi.howtodo.web.subject.entity.Subject;
 
 import lombok.Builder;
 import lombok.Getter;

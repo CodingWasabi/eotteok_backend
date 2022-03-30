@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -28,6 +29,7 @@ public class Account {
 	private String provider;
 	private String gender;
 
+	@Setter
 	private String nickname;
 
 	@Enumerated(EnumType.STRING)
@@ -49,4 +51,8 @@ public class Account {
 	}
 
 	public static final Account Anonymous = new Account(ANONYMOUS);
+
+	public boolean isAnonymous() {
+		return authority.equals(ANONYMOUS);
+	}
 }
