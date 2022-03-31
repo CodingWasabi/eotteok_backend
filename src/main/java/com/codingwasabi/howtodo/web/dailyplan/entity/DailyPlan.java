@@ -18,7 +18,7 @@ import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -64,7 +64,7 @@ public class DailyPlan {
 		comment.setDailyPlan(this);
 	}
 
-	public void fillSubject(Set<Subject> subjects) {
-		toDos.forEach(exam -> subjects.add(exam.getSubject()));
+	public void fillExams(Set<Exam> exams) {
+		toDos.forEach(toDo -> exams.add(toDo.getExam()));
 	}
 }

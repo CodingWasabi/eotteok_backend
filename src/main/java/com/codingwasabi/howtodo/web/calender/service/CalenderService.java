@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calender.entity.Calender;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 public interface CalenderService {
 
-	Calender create(Account account, int tendency, String nickname, List<Subject> subjects);
+	Calender create(Account account, int tendency, String nickname, List<Exam> exams);
 
 	Calender findMine(Account account);
 }

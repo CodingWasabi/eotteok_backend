@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,10 +44,10 @@ public class Calender {
 		dailyPlan.setCalender(this);
 	}
 
-	public Set<Subject> getSubjects() {
-		Set<Subject> subjects = new HashSet<>();
-		dailyPlans.forEach(plan -> plan.fillSubject(subjects));
+	public Set<Exam> getExams() {
+		Set<Exam> exams = new HashSet<>();
+		dailyPlans.forEach(plan -> plan.fillExams(exams));
 
-		return subjects;
+		return exams;
 	}
 }

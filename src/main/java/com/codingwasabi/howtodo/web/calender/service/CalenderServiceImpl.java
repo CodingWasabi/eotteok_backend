@@ -12,8 +12,8 @@ import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.policies.PlanMakingPolicy;
-import com.codingwasabi.howtodo.web.subject.SubjectRepository;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.ExamRepository;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,14 +22,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CalenderServiceImpl implements CalenderService {
 	private final CalenderRepository calenderRepository;
-	private final SubjectRepository subjectRepository;
+	private final ExamRepository subjectRepository;
 	private final DailyPlanRepository dailyPlanRepository;
 	private final PlanMakingPolicy planMakingPolicy;
 
 	@Override
-	public Calender create(Account account, int tendency, String nickname, List<Subject> subjects) {
+	public Calender create(Account account, int tendency, String nickname, List<Exam> exams) {
 		Calender calender = new Calender(account);
-		List<DailyPlan> dailyPlans = addDailyPlans(subjects, calender);
+		List<DailyPlan> dailyPlans = addDailyPlans(exams, calender);
 
 		if (account.isAnonymous()) {
 			return calender;
@@ -38,13 +38,13 @@ public class CalenderServiceImpl implements CalenderService {
 		account.setNickname(nickname);
 		account.setTendency(tendency);
 		dailyPlanRepository.saveAll(dailyPlans);
-		subjectRepository.saveAll(subjects);
+		subjectRepository.saveAll(exams);
 		calenderRepository.save(calender);
 		return calender;
 	}
 
-	private List<DailyPlan> addDailyPlans(List<Subject> subjects, Calender calender) {
-		List<DailyPlan> dailyPlans = planMakingPolicy.makeDailyPlans(subjects);
+	private List<DailyPlan> addDailyPlans(List<Exam> exams, Calender calender) {
+		List<DailyPlan> dailyPlans = planMakingPolicy.makeDailyPlans(exams);
 		dailyPlans.forEach(dailyPlan -> calender.addPlan(dailyPlan));
 
 		return dailyPlans;

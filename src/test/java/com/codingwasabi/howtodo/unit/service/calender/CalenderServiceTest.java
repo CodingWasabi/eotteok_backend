@@ -25,8 +25,7 @@ public class CalenderServiceTest extends ServiceUnitTest {
 
 	@BeforeEach
 	void init() {
-		this.calenderService = new CalenderServiceImpl(calenderRepository,
-													   subjectRepository,
+		this.calenderService = new CalenderServiceImpl(calenderRepository, examRepository,
 													   dailyPlanRepository,
 													   planMakingPolicy);
 	}
@@ -40,7 +39,7 @@ public class CalenderServiceTest extends ServiceUnitTest {
 		willReturn(dailyPlans).given(planMakingPolicy)
 							  .makeDailyPlans(any());
 		// when
-		Calender calender = calenderService.create(account, 3, "daehwan", List.of(Subject_생성("물리")));
+		Calender calender = calenderService.create(account, 3, "daehwan", List.of(Exam_생성("물리")));
 		// then
 		assertThat(calender.getDailyPlans()).hasSize(2);
 		assertThat(calender.getAccount()
@@ -57,7 +56,7 @@ public class CalenderServiceTest extends ServiceUnitTest {
 							  .makeDailyPlans(any());
 
 		// when
-		Calender calender = calenderService.create(account, 3, "daehwan", List.of(Subject_생성("물리")));
+		Calender calender = calenderService.create(account, 3, "daehwan", List.of(Exam_생성("물리")));
 
 		// then
 		assertThat(calender.getAccount()

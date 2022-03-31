@@ -24,7 +24,7 @@ import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.calender.service.CalenderService;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.policies.TendencyPolicy;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -55,20 +55,20 @@ public class CalenderController {
 													   .build());
 	}
 
-	private List<Subject> extractSubjects(Account account, CreateCalenderRequest createCalenderRequest) {
+	private List<Exam> extractSubjects(Account account, CreateCalenderRequest createCalenderRequest) {
 		return createCalenderRequest.getSubjects()
 									.stream()
-									.map(dto -> Subject.builder()
-													   .dateTime(dto.getLocalDateTime())
-													   .name(dto.getName())
-													   .studyDegree(dto.getPrepareTime())
-													   .account(account)
-													   .build())
+									.map(dto -> Exam.builder()
+													.dateTime(dto.getLocalDateTime())
+													.name(dto.getName())
+													.studyDegree(dto.getPrepareTime())
+													.account(account)
+													.build())
 									.collect(Collectors.toList());
 	}
 
 	private List<CreateCalenderResponse.SubjectInfo> convertCreateCalenderSubjectInfo(Calender calender) {
-		return calender.getSubjects()
+		return calender.getExams()
 					   .stream()
 					   .map(CreateCalenderResponse.SubjectInfo::from)
 					   .collect(Collectors.toList());
@@ -101,7 +101,7 @@ public class CalenderController {
 	}
 
 	private List<GetMyCalenderResponse.SubjectInfo> convertGetMyCalenderSubjectInfo(Calender calender) {
-		return calender.getSubjects()
+		return calender.getExams()
 					   .stream()
 					   .map(GetMyCalenderResponse.SubjectInfo::from)
 					   .collect(Collectors.toList());

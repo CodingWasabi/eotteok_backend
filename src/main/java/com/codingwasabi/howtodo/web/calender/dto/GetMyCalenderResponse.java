@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 import lombok.AccessLevel;
@@ -34,8 +34,8 @@ public class GetMyCalenderResponse {
 		private LocalDateTime date;
 		private int d_day;
 
-		public static SubjectInfo from(Subject subject) {
-			return new SubjectInfo(subject.getName(), subject.getDateTime(), subject.getDDay(LocalDate.now()));
+		public static SubjectInfo from(Exam exam) {
+			return new SubjectInfo(exam.getName(), exam.getDateTime(), exam.getDDay(LocalDate.now()));
 		}
 	}
 
@@ -57,7 +57,7 @@ public class GetMyCalenderResponse {
 			private double hour;
 
 			public static ToDoInfo from(ToDo toDo) {
-				return new ToDoInfo(toDo.getSubject()
+				return new ToDoInfo(toDo.getExam()
 										.getName(), toDo.getHour());
 			}
 		}

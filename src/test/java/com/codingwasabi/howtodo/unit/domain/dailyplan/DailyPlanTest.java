@@ -15,7 +15,7 @@ import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 @DisplayName("DailyPlan, 도메인 단위 테스트")
 public class DailyPlanTest {
@@ -69,16 +69,16 @@ public class DailyPlanTest {
 	@Test
 	void 과목_채우기() {
 		// given
-		Set<Subject> subjects = new HashSet<>();
+		Set<Exam> exams = new HashSet<>();
 		ToDo 물리 = ToDo_생성("물리");
 		ToDo 수학 = ToDo_생성("수학");
 		dailyPlan.addToDo(물리);
 		dailyPlan.addToDo(수학);
 
 		// when
-		dailyPlan.fillSubject(subjects);
+		dailyPlan.fillExams(exams);
 
 		// then
-		assertThat(subjects).containsOnly(물리.getSubject(), 수학.getSubject());
+		assertThat(exams).containsOnly(물리.getExam(), 수학.getExam());
 	}
 }

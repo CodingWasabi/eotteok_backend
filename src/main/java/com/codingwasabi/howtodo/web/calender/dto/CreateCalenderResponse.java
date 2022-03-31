@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AccessLevel;
@@ -38,8 +38,8 @@ public class CreateCalenderResponse {
 		private LocalDateTime date;
 		private int d_day;
 
-		public static SubjectInfo from(Subject subject) {
-			return new SubjectInfo(subject.getName(), subject.getDateTime(), subject.getDDay(LocalDate.now()));
+		public static SubjectInfo from(Exam exam) {
+			return new SubjectInfo(exam.getName(), exam.getDateTime(), exam.getDDay(LocalDate.now()));
 		}
 
 		private SubjectInfo(String name,
@@ -75,7 +75,7 @@ public class CreateCalenderResponse {
 			private double hour;
 
 			public static TodoInfo from(ToDo todo) {
-				return new TodoInfo(todo.getSubject()
+				return new TodoInfo(todo.getExam()
 										.getName(), todo.getHour());
 			}
 		}

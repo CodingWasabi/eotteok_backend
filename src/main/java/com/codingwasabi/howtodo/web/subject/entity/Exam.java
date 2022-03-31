@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Subject {
+public class Exam {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,7 +32,7 @@ public class Subject {
 	private int studyDegree;
 
 	@Builder
-	private Subject(Account account, String name, LocalDateTime dateTime, int studyDegree) {
+	private Exam(Account account, String name, LocalDateTime dateTime, int studyDegree) {
 		this.account = account;
 		this.name = name;
 		this.dateTime = dateTime;

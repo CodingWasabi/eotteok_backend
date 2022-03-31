@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.subject.entity.Exam;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -27,15 +27,15 @@ public class ToDo {
 	private double hour;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	private Subject subject;
+	private Exam exam;
 
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
 	private DailyPlan dailyPlan;
 
 	@Builder
-	private ToDo(double hour, Subject subject) {
+	private ToDo(double hour, Exam exam) {
 		this.hour = hour;
-		this.subject = subject;
+		this.exam = exam;
 	}
 }
