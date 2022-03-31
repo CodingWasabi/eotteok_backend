@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -61,5 +62,20 @@ public class CalenderServiceTest extends ServiceUnitTest {
 		// then
 		assertThat(calender.getAccount()
 						   .getNickname()).isEqualTo("daehwan");
+	}
+
+	@DisplayName("내 Calender 정보 조회")
+	@Test
+	void findMine_회원_Calender() {
+		// given
+		Account account = Account_생성();
+		willReturn(Optional.ofNullable(new Calender(account))).given(calenderRepository)
+										 .findByAccount(any());
+
+		// when
+		Calender calender = calenderService.findMine(account);
+
+		// then
+		assertThat(calender.getAccount()).isSameAs(account);
 	}
 }

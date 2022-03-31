@@ -2,7 +2,9 @@ package com.codingwasabi.howtodo.web.calender.service;
 
 import java.util.List;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calender.CalenderRepository;
@@ -16,6 +18,7 @@ import com.codingwasabi.howtodo.web.subject.entity.Subject;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CalenderServiceImpl implements CalenderService {
 	private final CalenderRepository calenderRepository;
@@ -45,5 +48,12 @@ public class CalenderServiceImpl implements CalenderService {
 		dailyPlans.forEach(dailyPlan -> calender.addPlan(dailyPlan));
 
 		return dailyPlans;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Calender findMine(Account account) {
+		return calenderRepository.findByAccount(account)
+								 .orElseThrow(() -> new AccessDeniedException("no data"));
 	}
 }

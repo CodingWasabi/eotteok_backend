@@ -1,13 +1,17 @@
 package com.codingwasabi.howtodo.web.calender;
 
+import static org.springframework.http.MediaType.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codingwasabi.howtodo.security.resolver.LoginAccount;
@@ -26,26 +30,29 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping()
 public class CalenderController {
 	private final CalenderService calenderService;
 	private final TendencyPolicy tendencyPolicy;
 
-	@PostMapping("/calender")
-	public CreateCalenderResponse createCalender(@LoginAccount Account account,
-												 @RequestBody CreateCalenderRequest createCalenderRequest) {
-
-		Calender calender = calenderService.create(account,
-												   createCalenderRequest.getNickname(),
-												   extractSubjects(account, createCalenderRequest));
+	@PostMapping(value = "/calender", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<CreateCalenderResponse> createCalender(@LoginAccount Account account,
+																 @RequestBody
+																	 CreateCalenderRequest createCalenderRequest) {
 
 		int tendency = tendencyPolicy.setUp(createCalenderRequest.getAnswers());
 
-		return CreateCalenderResponse.builder()
-									 .nickname(createCalenderRequest.getNickname())
-									 .tendency(tendency)
-									 .subjects(ConvertSubjectDto(calender))
-									 .calendar(ConvertCalenderDto(calender))
-									 .build();
+		Calender calender = calenderService.create(account,
+												   tendency,
+												   createCalenderRequest.getNickname(),
+												   extractSubjects(account, createCalenderRequest));
+
+		return ResponseEntity.ok(CreateCalenderResponse.builder()
+													   .nickname(createCalenderRequest.getNickname())
+													   .tendency(tendency)
+													   .subjects(convertCreateCalenderSubjectInfo(calender))
+													   .calendar(convertCreateCalenderDateInfo(calender))
+													   .build());
 	}
 
 	private List<Subject> extractSubjects(Account account, CreateCalenderRequest createCalenderRequest) {
@@ -60,50 +67,64 @@ public class CalenderController {
 									.collect(Collectors.toList());
 	}
 
-	private List<CreateCalenderResponse.SubjectInfo> ConvertSubjectDto(Calender calender) {
+	private List<CreateCalenderResponse.SubjectInfo> convertCreateCalenderSubjectInfo(Calender calender) {
 		return calender.getSubjects()
 					   .stream()
 					   .map(CreateCalenderResponse.SubjectInfo::from)
 					   .collect(Collectors.toList());
 	}
 
-	private List<CreateCalenderResponse.DateInfo> ConvertCalenderDto(Calender calender) {
+	private List<CreateCalenderResponse.DateInfo> convertCreateCalenderDateInfo(Calender calender) {
 		return calender.getDailyPlans()
 					   .stream()
-					   .map(plan -> CreateCalenderResponse.DateInfo.of(plan.getDate(), convertTodoDto(plan)))
+					   .map(plan -> CreateCalenderResponse.DateInfo.of(plan.getDate(), convertCreateCalenderTodo(plan)))
 					   .collect(Collectors.toList());
 	}
 
-	private List<CreateCalenderResponse.DateInfo.TodoInfo> convertTodoDto(DailyPlan plan) {
+	private List<CreateCalenderResponse.DateInfo.TodoInfo> convertCreateCalenderTodo(DailyPlan plan) {
 		return plan.getToDos()
 				   .stream()
 				   .map(CreateCalenderResponse.DateInfo.TodoInfo::from)
 				   .collect(Collectors.toList());
 	}
 
-	@GetMapping("/my/calender/result")
-	public GetMyCalenderResponse getMyCalenderResponse() {
+	@GetMapping(value = "/my/calender/result", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<GetMyCalenderResponse> getMyCalenderResponse(@LoginAccount Account account) {
+		Calender calender = calenderService.findMine(account);
 
-		List<GetMyCalenderResponse.DateInfoResponse> calendar = new ArrayList<>();
-
-		List<GetMyCalenderResponse.DateInfoResponse.SubjectResponse> subjects = new ArrayList<>();
-		subjects.add(new GetMyCalenderResponse.DateInfoResponse.SubjectResponse("데이터 분석 및 활용", 2));
-		subjects.add(new GetMyCalenderResponse.DateInfoResponse.SubjectResponse("컴파일러", 2));
-		subjects.add(new GetMyCalenderResponse.DateInfoResponse.SubjectResponse("디비", 2));
-		calendar.add(new GetMyCalenderResponse.DateInfoResponse(LocalDate.of(2022, 3, 24), 4, subjects));
-
-		subjects = new ArrayList<>();
-		subjects.add(new GetMyCalenderResponse.DateInfoResponse.SubjectResponse("데이터 분석 및 활용", 2));
-		subjects.add(new GetMyCalenderResponse.DateInfoResponse.SubjectResponse("컴파일러", 2));
-		subjects.add(new GetMyCalenderResponse.DateInfoResponse.SubjectResponse("디비", 2));
-		calendar.add(new GetMyCalenderResponse.DateInfoResponse(LocalDate.of(2022, 3, 25), 5, subjects));
-
-		return GetMyCalenderResponse.builder()
-									.tendency(3)
-									.calendar(calendar)
-									.build();
+		return ResponseEntity.ok(GetMyCalenderResponse.builder()
+													  .nickname(account.getNickname())
+													  .tendency(account.getTendency())
+													  .calendar(convertGetMyCalenderDateInfo(calender))
+													  .subjects(convertGetMyCalenderSubjectInfo(calender))
+													  .build());
 	}
 
+	private List<GetMyCalenderResponse.SubjectInfo> convertGetMyCalenderSubjectInfo(Calender calender) {
+		return calender.getSubjects()
+					   .stream()
+					   .map(GetMyCalenderResponse.SubjectInfo::from)
+					   .collect(Collectors.toList());
+	}
+
+	private List<GetMyCalenderResponse.DateInfo> convertGetMyCalenderDateInfo(Calender calender) {
+		return calender.getDailyPlans()
+					   .stream()
+					   .map(plan -> new GetMyCalenderResponse.DateInfo(plan.getDate(),
+																	   plan.getComments()
+																		   .size(),
+																	   convertGetMyCalenderTodo(plan)))
+					   .collect(Collectors.toList());
+	}
+
+	private List<GetMyCalenderResponse.DateInfo.ToDoInfo> convertGetMyCalenderTodo(DailyPlan plan) {
+		return plan.getToDos()
+				   .stream()
+				   .map(GetMyCalenderResponse.DateInfo.ToDoInfo::from)
+				   .collect(Collectors.toList());
+	}
+
+	@Deprecated
 	@GetMapping("/calender/{userId}/result")
 	public GetCalenderByUserIdResponse getCalenderByUserIdResponse() {
 
