@@ -33,7 +33,7 @@ public class CalenderServiceTest extends ServiceUnitTest {
 
 	@DisplayName("비회원 Calender 생성 로직")
 	@Test
-	void create_비회원_Calender() {
+	void create_비회원_정상생성() {
 		// given
 		Account account = Account.Anonymous;
 		List<DailyPlan> dailyPlans = List.of(DailyPlan_생성(account), DailyPlan_생성(account));
@@ -49,7 +49,7 @@ public class CalenderServiceTest extends ServiceUnitTest {
 
 	@DisplayName("회원 Calender 저장 로직")
 	@Test
-	void create_회원_Calender() {
+	void create_회원_정상저장() {
 		// given
 		Account account = Account_생성();
 		List<DailyPlan> dailyPlans = List.of(DailyPlan_생성(account), DailyPlan_생성(account));
@@ -66,7 +66,7 @@ public class CalenderServiceTest extends ServiceUnitTest {
 
 	@DisplayName("내 Calender 정보 조회")
 	@Test
-	void findMine_회원_Calender() {
+	void findMine_회원_정상조회() {
 		// given
 		Account account = Account_생성();
 		willReturn(Optional.ofNullable(new Calender(account))).given(calenderRepository)
