@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.codingwasabi.howtodo.unit.domain.utils.EntityFactory;
+import com.codingwasabi.howtodo.unit.utils.EntityFactory;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.subject.entity.Subject;
 

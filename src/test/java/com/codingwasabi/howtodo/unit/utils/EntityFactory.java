@@ -1,11 +1,15 @@
-package com.codingwasabi.howtodo.unit.domain.utils;
+package com.codingwasabi.howtodo.unit.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
-import com.codingwasabi.howtodo.web.todo.entity.ToDo;
+import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.subject.entity.Subject;
+import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 public class EntityFactory {
 	public static Account Account_생성() {
@@ -41,5 +45,12 @@ public class EntityFactory {
 					  .profileNumber(3)
 					  .body("댓글")
 					  .build();
+	}
+
+	public static DailyPlan DailyPlan_생성(Account account) {
+		return DailyPlan.builder()
+						.date(LocalDate.now())
+						.account(account)
+						.build();
 	}
 }

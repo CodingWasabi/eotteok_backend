@@ -1,6 +1,6 @@
 package com.codingwasabi.howtodo.unit.domain.dailyplan;
 
-import static com.codingwasabi.howtodo.unit.domain.utils.EntityFactory.*;
+import static com.codingwasabi.howtodo.unit.utils.EntityFactory.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDate;
