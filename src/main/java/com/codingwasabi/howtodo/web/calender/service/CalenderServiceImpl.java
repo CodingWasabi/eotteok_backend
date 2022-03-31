@@ -24,7 +24,7 @@ public class CalenderServiceImpl implements CalenderService {
 	private final PlanMakingPolicy planMakingPolicy;
 
 	@Override
-	public Calender create(Account account, String nickname, List<Subject> subjects) {
+	public Calender create(Account account, int tendency, String nickname, List<Subject> subjects) {
 		Calender calender = new Calender(account);
 		List<DailyPlan> dailyPlans = addDailyPlans(subjects, calender);
 
@@ -33,6 +33,7 @@ public class CalenderServiceImpl implements CalenderService {
 		}
 
 		account.setNickname(nickname);
+		account.setTendency(tendency);
 		dailyPlanRepository.saveAll(dailyPlans);
 		subjectRepository.saveAll(subjects);
 		calenderRepository.save(calender);
