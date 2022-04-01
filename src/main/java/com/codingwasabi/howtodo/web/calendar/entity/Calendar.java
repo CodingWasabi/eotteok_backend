@@ -31,7 +31,7 @@ public class Calendar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "calender", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DailyPlan> dailyPlans = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY)
