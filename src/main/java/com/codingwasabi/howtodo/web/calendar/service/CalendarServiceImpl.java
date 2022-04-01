@@ -52,7 +52,7 @@ public class CalendarServiceImpl implements CalendarService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Calendar findMine(Account account) {
+	public Calendar find(Account account) {
 		return calendarRepository.findByAccount(account)
 								 .orElseThrow(() -> new AccessDeniedException("no data"));
 	}

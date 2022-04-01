@@ -10,5 +10,5 @@ public interface CalendarService {
 
 	Calendar create(Account account, int tendency, String nickname, List<Exam> exams);
 
-	Calendar findMine(Account account);
+	Calendar find(Account account);
 }

@@ -73,7 +73,7 @@ public class CalendarServiceTest extends ServiceUnitTest {
 															  .findByAccount(any());
 
 		// when
-		Calendar calendar = calendarService.findMine(account);
+		Calendar calendar = calendarService.find(account);
 
 		// then
 		assertThat(calendar.getAccount()).isSameAs(account);

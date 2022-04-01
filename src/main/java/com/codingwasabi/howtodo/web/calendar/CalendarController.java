@@ -8,12 +8,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codingwasabi.howtodo.security.resolver.LoginAccount;
+import com.codingwasabi.howtodo.web.account.AccountService;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calendar.dto.CalendarResponse;
 import com.codingwasabi.howtodo.web.calendar.dto.CreateCalendarRequest;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping()
 public class CalendarController {
 	private final CalendarService calendarService;
+	private final AccountService accountService;
 	private final TendencyPolicy tendencyPolicy;
 
 	@PostMapping(value = "/calendar", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
@@ -64,8 +67,26 @@ public class CalendarController {
 
 	@GetMapping(value = "/my/calendar/result", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<CalendarResponse> getMyCalenderResponse(@LoginAccount Account account) {
-		Calendar calendar = calendarService.findMine(account);
+		Calendar calendar = calendarService.find(account);
 
-		return null;
+		return ResponseEntity.ok(CalendarResponse.builder()
+												 .nickname(account.getNickname())
+												 .tendency(account.getTendency())
+												 .exams(convertExamInfos(calendar))
+												 .calendar(convertMonthToDoInfo(calendar))
+												 .build());
+	}
+
+	@GetMapping(value = "/calendar/{userId}/comments", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<CalendarResponse> getOtherCalendarResponse(@PathVariable("userId") Long userId) {
+		Account account = accountService.findAccount(userId);
+		Calendar calendar = calendarService.find(account);
+
+		return ResponseEntity.ok(CalendarResponse.builder()
+												 .nickname(account.getNickname())
+												 .tendency(account.getTendency())
+												 .exams(convertExamInfos(calendar))
+												 .calendar(convertMonthToDoInfo(calendar))
+												 .build());
 	}
 }
