@@ -61,7 +61,7 @@ public class CalenderResponse {
 			@Setter
 			@AllArgsConstructor
 			@NoArgsConstructor
-			private static class TodoInfo {
+			public static class TodoInfo {
 				private String name;
 				private double hour;
 				private int d_day;
