@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 @DisplayName("Calender, 도메인 단위 테스트")
 public class CalenderTest {

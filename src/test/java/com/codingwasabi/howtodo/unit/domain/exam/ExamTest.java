@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.unit.domain.subject;
+package com.codingwasabi.howtodo.unit.domain.exam;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.codingwasabi.howtodo.unit.utils.EntityFactory;
 import com.codingwasabi.howtodo.web.account.entity.Account;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 @DisplayName("Exam, 도메인 단위 테스트")
 public class ExamTest {
@@ -32,11 +32,13 @@ public class ExamTest {
 						.account(account)
 						.dateTime(LocalDateTime.now())
 						.studyDegree(3)
+						.color(3)
 						.build();
 
 		// then
 		assertThat(exam.getName()).isEqualTo("과목");
 		assertThat(exam.getStudyDegree()).isEqualTo(3);
+		assertThat(exam.getColor()).isEqualTo(3);
 	}
 
 	@DisplayName("과목 d-day 구하기")

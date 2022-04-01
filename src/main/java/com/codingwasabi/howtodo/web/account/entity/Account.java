@@ -21,21 +21,20 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Setter
+	private String nickname;
+	@Setter
+	private int tendency;
+	@Enumerated(EnumType.STRING)
+	private Authority authority;
 
+	// oauth information
 	private Long oauthId;
 	private String email;
 	private String ageRange;
 	private String birthday;
 	private String provider;
 	private String gender;
-
-	@Setter
-	private String nickname;
-	@Setter
-	private int tendency;
-
-	@Enumerated(EnumType.STRING)
-	private Authority authority;
 
 	@Builder
 	private Account(Long oauthId, String email, String ageRange, String birthday, String provider, String gender) {

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 public class EntityFactory {

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 import lombok.AccessLevel;

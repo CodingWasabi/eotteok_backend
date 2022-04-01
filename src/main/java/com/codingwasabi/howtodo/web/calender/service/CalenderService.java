@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calender.entity.Calender;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 public interface CalenderService {
 

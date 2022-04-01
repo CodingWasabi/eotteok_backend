@@ -7,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.codingwasabi.howtodo.web.calender.CalenderRepository;
 import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.policies.PlanMakingPolicy;
-import com.codingwasabi.howtodo.web.subject.ExamRepository;
+import com.codingwasabi.howtodo.web.exam.ExamRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class ServiceUnitTest {

@@ -24,7 +24,7 @@ import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.calender.service.CalenderService;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.policies.TendencyPolicy;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 import lombok.RequiredArgsConstructor;
 

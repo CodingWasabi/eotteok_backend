@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 @DisplayName("ToDo, 도메인 단위 테스트")

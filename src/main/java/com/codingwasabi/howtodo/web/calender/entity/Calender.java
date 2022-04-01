@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -12,8 +12,8 @@ import com.codingwasabi.howtodo.web.calender.entity.Calender;
 import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.policies.PlanMakingPolicy;
-import com.codingwasabi.howtodo.web.subject.ExamRepository;
-import com.codingwasabi.howtodo.web.subject.entity.Exam;
+import com.codingwasabi.howtodo.web.exam.ExamRepository;
+import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 import lombok.RequiredArgsConstructor;
 

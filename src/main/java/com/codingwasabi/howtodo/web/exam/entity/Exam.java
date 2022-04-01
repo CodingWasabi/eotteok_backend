@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.subject.entity;
+package com.codingwasabi.howtodo.web.exam.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,13 +30,15 @@ public class Exam {
 	private String name;
 	private LocalDateTime dateTime;
 	private int studyDegree;
+	private int color;
 
 	@Builder
-	private Exam(Account account, String name, LocalDateTime dateTime, int studyDegree) {
+	private Exam(Account account, String name, LocalDateTime dateTime, int studyDegree, int color) {
 		this.account = account;
 		this.name = name;
 		this.dateTime = dateTime;
 		this.studyDegree = studyDegree;
+		this.color = color;
 	}
 
 	public int getDDay(LocalDate today) {
