@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.codingwasabi.howtodo.web.account.AccountRepository;
 import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
 import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.policies.PlanMakingPolicy;
@@ -22,4 +23,7 @@ public class ServiceUnitTest {
 
 	@Mock
 	protected PlanMakingPolicy planMakingPolicy;
+
+	@Mock
+	protected AccountRepository accountRepository;
 }
