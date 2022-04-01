@@ -51,4 +51,11 @@ public class EntityFactory {
 						.account(account)
 						.build();
 	}
+
+	public static DailyPlan 특정_날_의_DailyPlan_생성(Account account, int year, int month, int day) {
+		return DailyPlan.builder()
+						.account(account)
+						.date(LocalDate.of(year, month, day))
+						.build();
+	}
 }

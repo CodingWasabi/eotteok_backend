@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,9 +56,9 @@ public class CalenderTest {
 		assertThat(calender.getDailyPlans()).containsOnly(dailyPlan);
 	}
 
-	@DisplayName("모든 Subject 조회")
+	@DisplayName("모든 Exam 조회")
 	@Test
-	void Subject_모두_조회() {
+	void Exam_모두_조회() {
 		// given
 		DailyPlan dailyPlan = DailyPlan.builder()
 									   .account(account)
@@ -77,5 +78,29 @@ public class CalenderTest {
 										 .map(subject -> subject.getName())
 										 .collect(Collectors.toList());
 		assertThat(subjectNames).containsOnly("물리", "수학");
+	}
+
+	@DisplayName("월별 plan 조회")
+	@Test
+	void MonthPlans_조회() {
+		// given
+		Calender calender = new Calender(account);
+		DailyPlan dailyPlan_3월_20 = 특정_날_의_DailyPlan_생성(account, 2022, 03, 20);
+		DailyPlan dailyPlan_3월_30 = 특정_날_의_DailyPlan_생성(account, 2022, 03, 30);
+		DailyPlan dailyPlan_4월_15 = 특정_날_의_DailyPlan_생성(account, 2022, 04, 15);
+		DailyPlan dailyPlan_5월_05 = 특정_날_의_DailyPlan_생성(account, 2022, 05, 05);
+
+		calender.addPlan(dailyPlan_3월_20);
+		calender.addPlan(dailyPlan_3월_30);
+		calender.addPlan(dailyPlan_4월_15);
+		calender.addPlan(dailyPlan_5월_05);
+
+		// when
+		Map<Integer, List<DailyPlan>> monthPlan = calender.getMonthPlan();
+
+		// then
+		assertThat(monthPlan.get(3)).hasSize(2);
+		assertThat(monthPlan.get(4)).hasSize(1);
+		assertThat(monthPlan.get(5)).hasSize(1);
 	}
 }

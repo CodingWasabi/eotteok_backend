@@ -1,8 +1,10 @@
 package com.codingwasabi.howtodo.web.calender.entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -49,5 +51,21 @@ public class Calender {
 		dailyPlans.forEach(plan -> plan.fillExams(exams));
 
 		return exams;
+	}
+
+	public Map<Integer, List<DailyPlan>> getMonthPlan() {
+		Map<Integer, List<DailyPlan>> monthPlans = new HashMap<>();
+
+		dailyPlans.forEach(plan -> {
+			int month = plan.getDate()
+							.getMonthValue();
+			if (!monthPlans.containsKey(month)) {
+				monthPlans.put(month, new ArrayList<>());
+			}
+			monthPlans.get(month)
+					  .add(plan);
+		});
+
+		return monthPlans;
 	}
 }
