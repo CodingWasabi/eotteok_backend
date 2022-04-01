@@ -14,8 +14,9 @@ public class AccountServiceImpl implements AccountService {
 	private final AccountRepository accountRepository;
 
 	@Override
-	public Account findAccount(Long userId) {
-		return null;
+	public Account findAccount(Long accountId) {
+		return accountRepository.findById(accountId)
+								.orElseThrow(() -> new IllegalArgumentException("not valid accountId"));
 	}
 
 	@Override
