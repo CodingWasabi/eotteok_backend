@@ -1,5 +1,7 @@
 package com.codingwasabi.howtodo.web.todo.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,5 +39,13 @@ public class ToDo {
 	private ToDo(double hour, Exam exam) {
 		this.hour = hour;
 		this.exam = exam;
+	}
+
+	public int getDDay() {
+		LocalDate toDoDate = dailyPlan.getDate();
+		LocalDate examDate = exam.getDateTime()
+								 .toLocalDate();
+
+		return toDoDate.until(examDate).getDays();
 	}
 }

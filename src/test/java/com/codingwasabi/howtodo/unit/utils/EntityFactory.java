@@ -24,14 +24,14 @@ public class EntityFactory {
 	public static ToDo ToDo_생성(String 과목명) {
 		return ToDo.builder()
 				   .hour(2.5)
-				   .exam(Exam_생성(과목명))
+				   .exam(Exam_생성(과목명, 2022, 4, 9))
 				   .build();
 	}
 
-	public static Exam Exam_생성(String 과목명) {
+	public static Exam Exam_생성(String 과목명, int year, int month, int day) {
 		return Exam.builder()
 				   .account(Account_생성())
-				   .dateTime(LocalDateTime.now())
+				   .dateTime(LocalDateTime.of(year, month, day, 20, 30))
 				   .name(과목명)
 				   .studyDegree(3)
 				   .build();
