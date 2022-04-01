@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.calender.service;
+package com.codingwasabi.howtodo.web.calendar.service;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
-import com.codingwasabi.howtodo.web.calender.CalenderRepository;
-import com.codingwasabi.howtodo.web.calender.entity.Calender;
+import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.policies.PlanMakingPolicy;
@@ -20,40 +20,40 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CalenderServiceImpl implements CalenderService {
-	private final CalenderRepository calenderRepository;
+public class CalendarServiceImpl implements CalendarService {
+	private final CalendarRepository calendarRepository;
 	private final ExamRepository subjectRepository;
 	private final DailyPlanRepository dailyPlanRepository;
 	private final PlanMakingPolicy planMakingPolicy;
 
 	@Override
-	public Calender create(Account account, int tendency, String nickname, List<Exam> exams) {
-		Calender calender = new Calender(account);
-		List<DailyPlan> dailyPlans = addDailyPlans(exams, calender);
+	public Calendar create(Account account, int tendency, String nickname, List<Exam> exams) {
+		Calendar calendar = new Calendar(account);
+		List<DailyPlan> dailyPlans = addDailyPlans(exams, calendar);
 
 		if (account.isAnonymous()) {
-			return calender;
+			return calendar;
 		}
 
 		account.setNickname(nickname);
 		account.setTendency(tendency);
 		dailyPlanRepository.saveAll(dailyPlans);
 		subjectRepository.saveAll(exams);
-		calenderRepository.save(calender);
-		return calender;
+		calendarRepository.save(calendar);
+		return calendar;
 	}
 
-	private List<DailyPlan> addDailyPlans(List<Exam> exams, Calender calender) {
+	private List<DailyPlan> addDailyPlans(List<Exam> exams, Calendar calendar) {
 		List<DailyPlan> dailyPlans = planMakingPolicy.makeDailyPlans(exams);
-		dailyPlans.forEach(dailyPlan -> calender.addPlan(dailyPlan));
+		dailyPlans.forEach(dailyPlan -> calendar.addPlan(dailyPlan));
 
 		return dailyPlans;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Calender findMine(Account account) {
-		return calenderRepository.findByAccount(account)
+	public Calendar findMine(Account account) {
+		return calendarRepository.findByAccount(account)
 								 .orElseThrow(() -> new AccessDeniedException("no data"));
 	}
 }

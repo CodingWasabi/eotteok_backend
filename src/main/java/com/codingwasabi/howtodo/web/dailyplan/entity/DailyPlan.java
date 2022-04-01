@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
-import com.codingwasabi.howtodo.web.calender.entity.Calender;
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
@@ -41,12 +41,12 @@ public class DailyPlan {
 	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL)
 	private List<ToDo> toDos = new ArrayList<>();
 
-	@OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Calender calender;
+	private Calendar calendar;
 
 	@Builder
 	private DailyPlan(Account account, LocalDate date) {

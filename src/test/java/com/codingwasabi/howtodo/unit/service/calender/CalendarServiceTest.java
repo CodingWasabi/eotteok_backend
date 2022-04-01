@@ -13,19 +13,20 @@ import org.junit.jupiter.api.Test;
 
 import com.codingwasabi.howtodo.unit.service.ServiceUnitTest;
 import com.codingwasabi.howtodo.web.account.entity.Account;
-import com.codingwasabi.howtodo.web.calender.entity.Calender;
-import com.codingwasabi.howtodo.web.calender.service.CalenderService;
-import com.codingwasabi.howtodo.web.calender.service.CalenderServiceImpl;
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
+import com.codingwasabi.howtodo.web.calendar.service.CalendarService;
+import com.codingwasabi.howtodo.web.calendar.service.CalendarServiceImpl;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
 @DisplayName("Calender, 비즈니스 로직 단위 테스트")
-public class CalenderServiceTest extends ServiceUnitTest {
+public class CalendarServiceTest extends ServiceUnitTest {
 
-	private CalenderService calenderService;
+	private CalendarService calendarService;
 
 	@BeforeEach
 	void init() {
-		this.calenderService = new CalenderServiceImpl(calenderRepository, examRepository,
+		this.calendarService = new CalendarServiceImpl(calendarRepository,
+													   examRepository,
 													   dailyPlanRepository,
 													   planMakingPolicy);
 	}
@@ -39,10 +40,10 @@ public class CalenderServiceTest extends ServiceUnitTest {
 		willReturn(dailyPlans).given(planMakingPolicy)
 							  .makeDailyPlans(any());
 		// when
-		Calender calender = calenderService.create(account, 3, "daehwan", List.of(Exam_생성("물리", 2022, 4, 9)));
+		Calendar calendar = calendarService.create(account, 3, "daehwan", List.of(Exam_생성("물리", 2022, 4, 9)));
 		// then
-		assertThat(calender.getDailyPlans()).hasSize(2);
-		assertThat(calender.getAccount()
+		assertThat(calendar.getDailyPlans()).hasSize(2);
+		assertThat(calendar.getAccount()
 						   .getNickname()).isNull();
 	}
 
@@ -56,10 +57,10 @@ public class CalenderServiceTest extends ServiceUnitTest {
 							  .makeDailyPlans(any());
 
 		// when
-		Calender calender = calenderService.create(account, 3, "daehwan", List.of(Exam_생성("물리", 2022, 4, 9)));
+		Calendar calendar = calendarService.create(account, 3, "daehwan", List.of(Exam_생성("물리", 2022, 4, 9)));
 
 		// then
-		assertThat(calender.getAccount()
+		assertThat(calendar.getAccount()
 						   .getNickname()).isEqualTo("daehwan");
 	}
 
@@ -68,13 +69,13 @@ public class CalenderServiceTest extends ServiceUnitTest {
 	void findMine_회원_정상조회() {
 		// given
 		Account account = Account_생성();
-		willReturn(Optional.ofNullable(new Calender(account))).given(calenderRepository)
-										 .findByAccount(any());
+		willReturn(Optional.ofNullable(new Calendar(account))).given(calendarRepository)
+															  .findByAccount(any());
 
 		// when
-		Calender calender = calenderService.findMine(account);
+		Calendar calendar = calendarService.findMine(account);
 
 		// then
-		assertThat(calender.getAccount()).isSameAs(account);
+		assertThat(calendar.getAccount()).isSameAs(account);
 	}
 }

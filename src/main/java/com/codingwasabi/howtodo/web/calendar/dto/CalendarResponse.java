@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.calender.dto;
+package com.codingwasabi.howtodo.web.calendar.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CalenderResponse {
+public class CalendarResponse {
 
 	private String nickname;
 

@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.calender.dto;
+package com.codingwasabi.howtodo.web.calendar.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class CreateCalenderRequest {
+public class CreateCalendarRequest {
 	private String nickname;
 	private List<Integer> answers;
 	private List<ExamInfo> exams;

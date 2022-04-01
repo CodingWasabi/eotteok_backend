@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.calender.entity;
+package com.codingwasabi.howtodo.web.calendar.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Calender {
+public class Calendar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -37,13 +37,13 @@ public class Calender {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Account account;
 
-	public Calender(Account account) {
+	public Calendar(Account account) {
 		this.account = account;
 	}
 
 	public void addPlan(DailyPlan dailyPlan) {
 		dailyPlans.add(dailyPlan);
-		dailyPlan.setCalender(this);
+		dailyPlan.setCalendar(this);
 	}
 
 	public Set<Exam> getExams() {
