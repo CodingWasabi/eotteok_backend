@@ -15,12 +15,12 @@ import lombok.Setter;
 public class CreateCalenderRequest {
 	private String nickname;
 	private List<Integer> answers;
-	private List<SubjectInfo> subjects;
+	private List<ExamInfo> exams;
 
 	@Setter
 	@Getter
 	@NoArgsConstructor
-	public static class SubjectInfo {
+	public static class ExamInfo {
 		private String name;
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm")
 		private LocalDateTime localDateTime;
