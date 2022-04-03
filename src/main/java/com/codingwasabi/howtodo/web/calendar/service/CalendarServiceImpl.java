@@ -11,7 +11,7 @@ import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.policies.PlanMakingPolicy;
+import com.codingwasabi.howtodo.web.policy.planMaking.PlanMakingPolicy;
 import com.codingwasabi.howtodo.web.exam.ExamRepository;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 

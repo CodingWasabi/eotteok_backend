@@ -1,4 +1,4 @@
-package com.codingwasabi.howtodo.web.policies;
+package com.codingwasabi.howtodo.web.policy.planMaking;
 
 import java.util.List;
 

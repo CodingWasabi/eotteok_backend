@@ -22,7 +22,7 @@ import com.codingwasabi.howtodo.web.calendar.dto.CreateCalendarRequest;
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.calendar.service.CalendarService;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
-import com.codingwasabi.howtodo.web.policies.TendencyPolicy;
+import com.codingwasabi.howtodo.web.policy.tendency.TendencyPolicy;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,7 +38,8 @@ public class CalendarController {
 	public ResponseEntity<CalendarResponse> createCalendar(@LoginAccount Account account,
 														   @RequestBody CreateCalendarRequest createCalendarRequest) {
 
-		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers());
+		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers(),
+											getAverageStudyDegree(createCalendarRequest.getExams()));
 
 		Calendar calendar = calendarService.create(account,
 												   tendency,
@@ -51,6 +52,19 @@ public class CalendarController {
 												 .exams(convertExamInfos(calendar))
 												 .calendar(convertMonthToDoInfo(calendar))
 												 .build());
+	}
+
+	private int getAverageStudyDegree(List<CreateCalendarRequest.ExamInfo> exams) {
+		int examCount = 0;
+		int degreeSum = 0;
+
+		for (int i = 0; i < exams.size(); i++) {
+			examCount++;
+			degreeSum += exams.get(i)
+							  .getPrepareTime();
+		}
+
+		return degreeSum / examCount;
 	}
 
 	private List<Exam> extractSubjects(Account account, CreateCalendarRequest createCalendarRequest) {
