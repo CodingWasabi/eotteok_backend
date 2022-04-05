@@ -39,6 +39,7 @@ public class CalendarController {
 														   @RequestBody CreateCalendarRequest createCalendarRequest) {
 
 		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers(),
+											createCalendarRequest.getDailyQuota(),
 											getAverageStudyDegree(createCalendarRequest.getExams()));
 
 		Calendar calendar = calendarService.create(account,

@@ -16,6 +16,7 @@ public class CreateCalendarRequest {
 	private String nickname;
 	private List<Integer> answers;
 	private List<ExamInfo> exams;
+	private int dailyQuota;
 
 	@Setter
 	@Getter
