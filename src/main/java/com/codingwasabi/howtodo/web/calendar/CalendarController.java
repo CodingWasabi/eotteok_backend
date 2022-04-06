@@ -38,14 +38,13 @@ public class CalendarController {
 	public ResponseEntity<CalendarResponse> createCalendar(@LoginAccount Account account,
 														   @RequestBody CreateCalendarRequest createCalendarRequest) {
 
+		List<Exam> exams = extractExams(account, createCalendarRequest);
+
 		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers(),
 											createCalendarRequest.getDailyQuota(),
-											getAverageStudyDegree(createCalendarRequest.getExams()));
+											exams);
 
-		Calendar calendar = calendarService.create(account,
-												   tendency,
-												   createCalendarRequest.getNickname(),
-												   extractSubjects(account, createCalendarRequest));
+		Calendar calendar = calendarService.create(account, tendency, createCalendarRequest.getNickname(), exams);
 
 		return ResponseEntity.ok(CalendarResponse.builder()
 												 .nickname(createCalendarRequest.getNickname())
@@ -68,7 +67,7 @@ public class CalendarController {
 		return degreeSum / examCount;
 	}
 
-	private List<Exam> extractSubjects(Account account, CreateCalendarRequest createCalendarRequest) {
+	private List<Exam> extractExams(Account account, CreateCalendarRequest createCalendarRequest) {
 		return createCalendarRequest.getExams()
 									.stream()
 									.map(dto -> Exam.builder()
