@@ -43,7 +43,7 @@ public class ToDo {
 
 	public int getDDay() {
 		LocalDate toDoDate = dailyPlan.getDate();
-		LocalDate examDate = exam.getDateTime()
+		LocalDate examDate = exam.getDueDateTime()
 								 .toLocalDate();
 
 		return toDoDate.until(examDate).getDays();

@@ -28,21 +28,21 @@ public class Exam {
 	private Account account;
 
 	private String name;
-	private LocalDateTime dateTime;
+	private LocalDateTime dueDateTime;
 	private int studyDegree;
 	private int color;
 
 	@Builder
-	private Exam(Account account, String name, LocalDateTime dateTime, int studyDegree, int color) {
+	private Exam(Account account, String name, LocalDateTime dueDateTime, int studyDegree, int color) {
 		this.account = account;
 		this.name = name;
-		this.dateTime = dateTime;
+		this.dueDateTime = dueDateTime;
 		this.studyDegree = studyDegree;
 		this.color = color;
 	}
 
 	public int getDDay(LocalDate today) {
-		return today.until(dateTime.toLocalDate())
+		return today.until(dueDateTime.toLocalDate())
 					.getDays();
 	}
 }

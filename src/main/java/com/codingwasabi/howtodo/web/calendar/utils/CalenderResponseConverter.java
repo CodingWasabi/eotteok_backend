@@ -16,15 +16,15 @@ public class CalenderResponseConverter {
 					   .stream()
 					   .map(exam -> new CalendarResponse.ExamInfo(exam.getName(),
 																  exam.getColor(),
-																  exam.getDateTime()
+																  exam.getDueDateTime()
 																	  .getYear(),
-																  exam.getDateTime()
+																  exam.getDueDateTime()
 																	  .getMonthValue(),
-																  exam.getDateTime()
+																  exam.getDueDateTime()
 																	  .getDayOfMonth(),
-																  exam.getDateTime()
+																  exam.getDueDateTime()
 																	  .getHour(),
-																  exam.getDateTime()
+																  exam.getDueDateTime()
 																	  .getMinute(),
 																  exam.getDDay(LocalDate.now())))
 					   .collect(Collectors.toList());
