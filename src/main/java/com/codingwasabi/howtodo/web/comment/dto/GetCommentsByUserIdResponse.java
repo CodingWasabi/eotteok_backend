@@ -2,6 +2,8 @@ package com.codingwasabi.howtodo.web.comment.dto;
 
 import java.util.List;
 
+import com.codingwasabi.howtodo.web.comment.entity.Comment;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +27,12 @@ public class GetCommentsByUserIdResponse {
 		private int profileNumber;
 		private String nickname;
 		private String body;
+		
+		public CommentResponse(Comment comment) {
+			this.profileNumber = comment.getProfileNumber();
+			this.nickname = comment.getAccount().getNickname();
+			this.body = comment.getBody();
+		}
 	}
 
 }

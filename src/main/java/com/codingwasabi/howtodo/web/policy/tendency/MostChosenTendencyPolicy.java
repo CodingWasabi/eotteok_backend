@@ -18,7 +18,8 @@ public class MostChosenTendencyPolicy implements TendencyPolicy {
 		int mostOne = mostChosen(answers);
 		int apart = extractApart(dailyQuota, exams);
 
-		return getTendency(mostOne, apart);
+		// return getTendency(mostOne, apart);
+		return 1;
 	}
 
 	private int mostChosen(List<Integer> answers) {
@@ -46,6 +47,6 @@ public class MostChosenTendencyPolicy implements TendencyPolicy {
 	}
 
 	private int extractApart(int dailyQuota, List<Exam> exams) {
-		
+		return 1;
 	}
 }
