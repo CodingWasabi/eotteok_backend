@@ -39,9 +39,7 @@ public class MostChosenTendencySolution implements TendencySolution {
 	}
 
 	@Override
-	public int extractExamsInterval(int dailyQuota, List<Exam> exams, LocalDate date) {
-		Validator.validate(dailyQuota, exams, date);
-
+	public int extractExamsInterval(int dailyQuota, List<Exam> exams, LocalDate today) {
 		List<Exam> sortedExams = exams.stream()
 									  .sorted((e1, e2) -> {
 										  LocalDateTime day1 = e1.getDueDateTime();
@@ -54,6 +52,8 @@ public class MostChosenTendencySolution implements TendencySolution {
 										  return 0;
 									  })
 									  .collect(Collectors.toList());
+
+		Validator.validate(dailyQuota, sortedExams, today);
 
 		// [7] 시험 수가 1개인 경우
 		if (exams.size() == 1) {
@@ -148,7 +148,7 @@ public class MostChosenTendencySolution implements TendencySolution {
 	}
 
 	private static class Validator {
-		static void validate(int dailyQuota, List<Exam> exams, LocalDate date) {
+		static void validate(int dailyQuota, List<Exam> exams, LocalDate today) {
 			// 예외
 			// - 시험 수가 0개인 경우
 			if (exams.isEmpty()) {
@@ -162,9 +162,29 @@ public class MostChosenTendencySolution implements TendencySolution {
 
 			// 시험 필요 공부시간이 공부할 시간보다 큰 경우
 			if (exams.stream()
-					 .anyMatch(exam -> exam.getStudyDegree() > dailyQuota * getRemainDays(exam, date))) {
+					 .anyMatch(exam -> exam.getStudyDegree() > dailyQuota * getRemainDays(exam, today))) {
 				throw new IllegalArgumentException("there is a exam need over study time");
 			}
+
+			// 공부할 시간으로 모든 시험을 공부 할 수없는 경우 (각 시험의 공부할당량을 비교하여)
+			if (noRemainTime(exams, dailyQuota, today)) {
+				throw new IllegalArgumentException("it cannot make plan because no remain time");
+			}
+		}
+
+		private static boolean noRemainTime(List<Exam> exams, int dailyQuota, LocalDate today) {
+			int allOfStudyTime = getRemainDays(exams.get(exams.size() - 1), today) * dailyQuota;
+
+			for (Exam exam : exams) {
+				if (allOfStudyTime <= exam.getStudyDegree()) {
+					return true;
+				}
+				allOfStudyTime -= exam.getStudyDegree();
+			}
+			if (allOfStudyTime < 0) {
+				return true;
+			}
+			return false;
 		}
 
 		private static int getRemainDays(Exam exam, LocalDate date) {

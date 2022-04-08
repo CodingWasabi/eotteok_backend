@@ -137,4 +137,46 @@ public class TendencyPolicyTest {
 		// then
 		assertThat(tendency).isEqualTo(21);
 	}
+
+	@Test
+	@DisplayName("예외) 당일 시험이 입력된 경우")
+	void 당일_시험() {
+		// given
+		List<Integer> answers = new ArrayList<>(List.of(3, 3, 3, 2));
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 4, 05));
+
+		// when/then
+		assertThatIllegalArgumentException().isThrownBy(() -> tendencyPolicy.setUp(answers,
+																				   6,
+																				   exams,
+																				   LocalDate.of(2022, 04, 05)));
+	}
+
+	@Test
+	@DisplayName("예외) 매일 공부할 시간이 선택한 시험별 공부시간에 부족한경우")
+	void 공부시간_부족() {
+		// given
+		List<Integer> answers = new ArrayList<>(List.of(3, 3, 3, 2));
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 4, 10, 10), Exam_생성("자료구조", 2022, 4, 13, 10));
+
+		// when/then
+		assertThatIllegalArgumentException().isThrownBy(() -> tendencyPolicy.setUp(answers,
+																				   1,
+																				   exams,
+																				   LocalDate.of(2022, 04, 8)));
+	}
+
+	@Test
+	@DisplayName("예외) 매일 공부할 시간이 선택한 시험별 공부시간에 부족한경우 2")
+	void 공부시간_부족_2() {
+		// given
+		List<Integer> answers = new ArrayList<>(List.of(3, 3, 3, 2));
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 4, 10, 10), Exam_생성("자료구조", 2022, 4, 11, 10));
+
+		// when/then
+		assertThatIllegalArgumentException().isThrownBy(() -> tendencyPolicy.setUp(answers,
+																				   5,
+																				   exams,
+																				   LocalDate.of(2022, 04, 7)));
+	}
 }

@@ -37,6 +37,15 @@ public class EntityFactory {
 				   .build();
 	}
 
+	public static Exam Exam_생성(String 과목명, int year, int month, int day, int degree) {
+		return Exam.builder()
+				   .account(Account_생성())
+				   .dueDateTime(LocalDateTime.of(year, month, day, 20, 30))
+				   .name(과목명)
+				   .studyDegree(degree)
+				   .build();
+	}
+
 	public static Comment Comment_생성() {
 		return Comment.builder()
 					  .account(Account_생성())
