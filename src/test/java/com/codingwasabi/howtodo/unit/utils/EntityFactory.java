@@ -31,7 +31,7 @@ public class EntityFactory {
 	public static Exam Exam_생성(String 과목명, int year, int month, int day) {
 		return Exam.builder()
 				   .account(Account_생성())
-				   .dateTime(LocalDateTime.of(year, month, day, 20, 30))
+				   .dueDateTime(LocalDateTime.of(year, month, day, 20, 30))
 				   .name(과목명)
 				   .studyDegree(3)
 				   .build();

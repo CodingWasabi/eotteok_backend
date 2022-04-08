@@ -30,7 +30,7 @@ public class ExamTest {
 		Exam exam = Exam.builder()
 						.name("과목")
 						.account(account)
-						.dateTime(LocalDateTime.now())
+						.dueDateTime(LocalDateTime.now())
 						.studyDegree(3)
 						.color(3)
 						.build();
@@ -48,7 +48,7 @@ public class ExamTest {
 		Exam exam = Exam.builder()
 						.name("과목")
 						.account(account)
-						.dateTime(LocalDateTime.of(2022, 04, 20, 14, 30))
+						.dueDateTime(LocalDateTime.of(2022, 04, 20, 14, 30))
 						.studyDegree(3)
 						.build();
 
