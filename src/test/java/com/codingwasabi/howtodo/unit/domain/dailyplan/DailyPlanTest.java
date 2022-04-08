@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
-import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
+import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 @DisplayName("DailyPlan, 도메인 단위 테스트")
 public class DailyPlanTest {

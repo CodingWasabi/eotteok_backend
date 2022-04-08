@@ -40,9 +40,9 @@ public class ToDoTest {
 		DailyPlan dailyPlan = 특정_날_의_DailyPlan_생성(account, 2022, 4, 5);
 
 		ToDo toDo = ToDo.builder()
-						 .exam(exam)
-						 .hour(2.5)
-						 .build();
+						.exam(exam)
+						.hour(2.5)
+						.build();
 		dailyPlan.addToDo(toDo);
 
 		// when
