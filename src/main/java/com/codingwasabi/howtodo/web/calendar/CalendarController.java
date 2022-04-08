@@ -56,19 +56,6 @@ public class CalendarController {
 												 .build());
 	}
 
-	private int getAverageStudyDegree(List<CreateCalendarRequest.ExamInfo> exams) {
-		int examCount = 0;
-		int degreeSum = 0;
-
-		for (int i = 0; i < exams.size(); i++) {
-			examCount++;
-			degreeSum += exams.get(i)
-							  .getPrepareTime();
-		}
-
-		return degreeSum / examCount;
-	}
-
 	private List<Exam> extractExams(Account account, CreateCalendarRequest createCalendarRequest) {
 		return createCalendarRequest.getExams()
 									.stream()

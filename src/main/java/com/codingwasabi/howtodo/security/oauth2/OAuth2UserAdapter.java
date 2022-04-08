@@ -14,7 +14,7 @@ public class OAuth2UserAdapter extends DefaultOAuth2User implements UserDetails 
 
 	public OAuth2UserAdapter(Account account, String attributeName, Map<String, Object> attributes) {
 		super(Collections.singleton(new SimpleGrantedAuthority(account.getAuthority()
-																   .getRole())), attributes, attributeName);
+																	  .getRole())), attributes, attributeName);
 		this.account = account;
 	}
 

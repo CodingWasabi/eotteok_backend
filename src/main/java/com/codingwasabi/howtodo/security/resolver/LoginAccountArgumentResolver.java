@@ -13,8 +13,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.security.oauth2.OAuth2UserAdapter;
+import com.codingwasabi.howtodo.web.account.entity.Account;
 
 @Component
 public class LoginAccountArgumentResolver implements HandlerMethodArgumentResolver {
