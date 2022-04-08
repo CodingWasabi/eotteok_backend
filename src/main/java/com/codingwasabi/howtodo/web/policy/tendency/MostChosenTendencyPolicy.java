@@ -1,8 +1,7 @@
 package com.codingwasabi.howtodo.web.policy.tendency;
 
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -18,9 +17,9 @@ public class MostChosenTendencyPolicy implements TendencyPolicy {
 
 	@Override
 	// 완성되지않음, 배포 테스트 용으로 우선 커밋, 추후에 수정되어 재 배포 -> 기능이 실행되지 않을것이다.
-	public int setUp(List<Integer> answers, int dailyQuota, List<Exam> exams) {
+	public int setUp(List<Integer> answers, int dailyQuota, List<Exam> exams, LocalDate date) {
 		int mostOne = tendencySolution.mostChosen(answers);
-		int interval = tendencySolution.extractExamsInterval(dailyQuota, exams);
+		int interval = tendencySolution.extractExamsInterval(dailyQuota, exams, date);
 
 		return getTendency(mostOne, interval);
 	}

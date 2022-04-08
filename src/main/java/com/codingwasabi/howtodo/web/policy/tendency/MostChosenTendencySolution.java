@@ -38,23 +38,9 @@ public class MostChosenTendencySolution implements TendencySolution {
 	}
 
 	@Override
-	public int extractExamsInterval(int dailyQuota, List<Exam> exams) {
-		Validator.validate(dailyQuota, exams);
+	public int extractExamsInterval(int dailyQuota, List<Exam> exams, LocalDate date) {
+		Validator.validate(dailyQuota, exams, date);
 
-		// [7] 시험 수가 1개인 경우
-		if (exams.size() == 1) {
-			return 7;
-		}
-
-		// [1] 모든 시험의 격차가 하루 간격
-		if (everyExamHasIntervalOnlyOneDay(exams)) {
-			return 1;
-		}
-
-		return 0;
-	}
-
-	private boolean everyExamHasIntervalOnlyOneDay(List<Exam> exams) {
 		List<Exam> sortedExams = exams.stream()
 									  .sorted((e1, e2) -> {
 										  LocalDateTime day1 = e1.getDueDateTime();
@@ -68,13 +54,81 @@ public class MostChosenTendencySolution implements TendencySolution {
 									  })
 									  .collect(Collectors.toList());
 
+		// [7] 시험 수가 1개인 경우
+		if (exams.size() == 1) {
+			return 7;
+		}
+
+		// [1] 모든 시험의 격차가 하루 간격
+		if (everyExamHasIntervalOnlyOneDay(sortedExams)) {
+			return 1;
+		}
+
+		// [4] 두 시험의 간격이 너무 먼 경우
+		if (allExamLocatedFrontOrBackDayOfMonth(sortedExams)) {
+			return 4;
+		}
+
+		// [5] 모든 시험이 월 초인 경우
+		if (allExamLocatedFrontOfMonth(sortedExams)) {
+			return 5;
+		}
+
+		// [6] 모든 시험이 월 말인 경우
+		if (allExamLocatedBackOfMonth(sortedExams)) {
+			return 6;
+		}
+
+		return 3;
+	}
+
+	private boolean allExamLocatedBackOfMonth(List<Exam> sortedExams) {
+		for (Exam exam : sortedExams) {
+			if (exam.isFront() || exam.isMid()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean allExamLocatedFrontOfMonth(List<Exam> sortedExams) {
+		for (Exam exam : sortedExams) {
+			if (exam.isBack() || exam.isMid()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean allExamLocatedFrontOrBackDayOfMonth(List<Exam> sortedExams) {
+		boolean hasFront = false;
+		boolean hasBack = false;
+
+		for (Exam exam : sortedExams) {
+			if (exam.isMid()) {
+				return false;
+			}
+			if (exam.isFront()) {
+				hasFront = true;
+			}
+			if (exam.isBack()) {
+				hasBack = true;
+			}
+		}
+
+		return hasFront && hasBack;
+	}
+
+	private boolean everyExamHasIntervalOnlyOneDay(List<Exam> sortedExams) {
 		LocalDate beforeDay = null;
+
 		for (Exam exam : sortedExams) {
 			if (beforeDay == null) {
 				beforeDay = exam.getDueDateTime()
 								.toLocalDate();
 				continue;
 			}
+
 			if (Math.abs(exam.getDueDateTime()
 							 .toLocalDate()
 							 .until(beforeDay)
@@ -88,7 +142,7 @@ public class MostChosenTendencySolution implements TendencySolution {
 	}
 
 	private static class Validator {
-		static void validate(int dailyQuota, List<Exam> exams) {
+		static void validate(int dailyQuota, List<Exam> exams, LocalDate date) {
 			// 예외
 			// - 시험 수가 0개인 경우
 			if (exams.isEmpty()) {
@@ -102,13 +156,13 @@ public class MostChosenTendencySolution implements TendencySolution {
 
 			// 시험 필요 공부시간이 공부할 시간보다 큰 경우
 			if (exams.stream()
-					 .anyMatch(exam -> exam.getStudyDegree() > dailyQuota * getRemainDays(exam))) {
+					 .anyMatch(exam -> exam.getStudyDegree() > dailyQuota * getRemainDays(exam, date))) {
 				throw new IllegalArgumentException("there is a exam need over study time");
 			}
 		}
 
-		private static int getRemainDays(Exam exam) {
-			return exam.getDDay(LocalDate.now()) - 1;
+		private static int getRemainDays(Exam exam, LocalDate date) {
+			return exam.getDDay(date) - 1;
 		}
 	}
 }

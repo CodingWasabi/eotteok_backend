@@ -3,6 +3,7 @@ package com.codingwasabi.howtodo.web.calendar;
 import static com.codingwasabi.howtodo.web.calendar.utils.CalenderResponseConverter.*;
 import static org.springframework.http.MediaType.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,8 @@ public class CalendarController {
 
 		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers(),
 											createCalendarRequest.getDailyQuota(),
-											exams);
+											exams,
+											LocalDate.now());
 
 		Calendar calendar = calendarService.create(account, tendency, createCalendarRequest.getNickname(), exams);
 

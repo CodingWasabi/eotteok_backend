@@ -45,4 +45,17 @@ public class Exam {
 		return today.until(dueDateTime.toLocalDate())
 					.getDays();
 	}
+
+	public boolean isMid() {
+		int day = this.dueDateTime.getDayOfMonth();
+		return 10 <= day && 20 >= day;
+	}
+
+	public boolean isFront() {
+		return 10 > this.dueDateTime.getDayOfMonth();
+	}
+
+	public boolean isBack() {
+		return 20 < this.dueDateTime.getDayOfMonth();
+	}
 }

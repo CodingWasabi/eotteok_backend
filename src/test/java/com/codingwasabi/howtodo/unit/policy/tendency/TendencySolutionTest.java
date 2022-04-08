@@ -3,6 +3,7 @@ package com.codingwasabi.howtodo.unit.policy.tendency;
 import static com.codingwasabi.howtodo.unit.utils.EntityFactory.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,7 +81,10 @@ public class TendencySolutionTest {
 	void 시험_개수_0개() {
 		// when/then
 		assertThatIllegalArgumentException().isThrownBy(() -> tendencySolution.extractExamsInterval(6,
-																									new ArrayList<>()))
+																									new ArrayList<>(),
+																									LocalDate.of(2022,
+																												 04,
+																												 10)))
 											.withMessage("exams size cannot be 0");
 	}
 
@@ -98,7 +102,11 @@ public class TendencySolutionTest {
 								   Exam_생성("데이터베이스", 2022, 04, 07));
 
 		// when/then
-		assertThatIllegalArgumentException().isThrownBy(() -> tendencySolution.extractExamsInterval(6, exams))
+		assertThatIllegalArgumentException().isThrownBy(() -> tendencySolution.extractExamsInterval(6,
+																									exams,
+																									LocalDate.of(2022,
+																												 04,
+																												 03)))
 											.withMessage("exams size cannot be over 7");
 	}
 
@@ -109,7 +117,11 @@ public class TendencySolutionTest {
 		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 03, 31));
 
 		// when/then
-		assertThatIllegalArgumentException().isThrownBy(() -> tendencySolution.extractExamsInterval(2, exams))
+		assertThatIllegalArgumentException().isThrownBy(() -> tendencySolution.extractExamsInterval(2,
+																									exams,
+																									LocalDate.of(2022,
+																												 04,
+																												 05)))
 											.withMessage("there is a exam need over study time");
 	}
 
@@ -120,7 +132,7 @@ public class TendencySolutionTest {
 		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 04, 20));
 
 		// when
-		int interval = tendencySolution.extractExamsInterval(2, exams);
+		int interval = tendencySolution.extractExamsInterval(2, exams, LocalDate.of(2022, 04, 07));
 
 		// then
 		assertThat(interval).isEqualTo(7);
@@ -135,9 +147,64 @@ public class TendencySolutionTest {
 								   Exam_생성("알고리즘", 2022, 04, 21));
 
 		// when
-		int interval = tendencySolution.extractExamsInterval(2, exams);
+		int interval = tendencySolution.extractExamsInterval(2, exams, LocalDate.of(2022, 04, 07));
 
 		// then
 		assertThat(interval).isEqualTo(1);
+	}
+
+	@DisplayName("시험간 간격이 너무 먼 경우")
+	@Test
+	void 한시험이_월초_한시험이_월말_인경우() {
+		// given
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 04, 05), Exam_생성("알고리즘", 2022, 04, 25));
+
+		// when
+		int interval = tendencySolution.extractExamsInterval(3, exams, LocalDate.of(2022, 04, 03));
+
+		// then
+		assertThat(interval).isEqualTo(4);
+	}
+
+	@DisplayName("모든 시험이 10일 안 인 경우 (월초)")
+	@Test
+	void 모든_시험이_월초() {
+		// given
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 4, 5), Exam_생성("알고리즘", 2022, 4, 9));
+
+		// when
+		int interval = tendencySolution.extractExamsInterval(3, exams, LocalDate.of(2022, 4, 3));
+
+		// then
+		assertThat(interval).isEqualTo(5);
+	}
+
+	@DisplayName("모든 시험이 20일 이후 인 경우, (월말)")
+	@Test
+	void 모든_시험이_월말() {
+		// given
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 4, 21), Exam_생성("알고리즘", 2022, 4, 25));
+
+		// when
+		int interval = tendencySolution.extractExamsInterval(3, exams, LocalDate.of(2022, 4, 3));
+
+		// then
+		assertThat(interval).isEqualTo(6);
+	}
+
+	@DisplayName("위의 모든 경우가 아닌 경우")
+	@Test
+	void 무난한_시험_간격() {
+		// given
+		List<Exam> exams = List.of(Exam_생성("자료구조", 2022, 04, 05),
+								   Exam_생성("운영체제", 2022, 04, 13),
+								   Exam_생성("운영체제", 2022, 04, 14),
+								   Exam_생성("알고리즘", 2022, 04, 25));
+
+		// when
+		int interval = tendencySolution.extractExamsInterval(3, exams, LocalDate.of(2022, 04, 03));
+
+		// then
+		assertThat(interval).isEqualTo(3);
 	}
 }
