@@ -2,6 +2,7 @@ package com.codingwasabi.howtodo.web.policy.tendency;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import com.codingwasabi.howtodo.web.exam.entity.Exam;
 public class MostChosenTendencySolution implements TendencySolution {
 	@Override
 	public int mostChosen(List<Integer> answers) {
-		answers.sort((a, b) -> a - b);
+		Collections.sort(answers);
 
 		int mostOne = 0;
 		int maxCount = 0;
@@ -57,6 +58,11 @@ public class MostChosenTendencySolution implements TendencySolution {
 		// [7] 시험 수가 1개인 경우
 		if (exams.size() == 1) {
 			return 7;
+		}
+
+		// [2] 시험 수가 6개 이상 경우
+		if (exams.size() >= 6) {
+			return 2;
 		}
 
 		// [1] 모든 시험의 격차가 하루 간격
