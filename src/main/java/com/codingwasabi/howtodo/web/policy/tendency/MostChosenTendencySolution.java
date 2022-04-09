@@ -168,7 +168,7 @@ public class MostChosenTendencySolution implements TendencySolution {
 			int allOfStudyTime = getRemainDays(exams.get(exams.size() - 1), today) * dailyQuota;
 
 			for (Exam exam : exams) {
-				if (allOfStudyTime <= exam.getStudyDegree()) {
+				if (allOfStudyTime < exam.getStudyDegree()) {
 					return true;
 				}
 				allOfStudyTime -= exam.getStudyDegree();

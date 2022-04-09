@@ -24,7 +24,7 @@ public class CreateCalendarRequest {
 	public static class ExamInfo {
 		private String name;
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm")
-		private LocalDateTime localDateTime;
+		private LocalDateTime date;
 		private int prepareTime;
 	}
 }

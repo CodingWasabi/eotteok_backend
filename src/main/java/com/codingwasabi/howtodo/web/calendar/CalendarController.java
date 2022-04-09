@@ -64,7 +64,7 @@ public class CalendarController {
 		return createCalendarRequest.getExams()
 									.stream()
 									.map(dto -> Exam.builder()
-													.dueDateTime(dto.getLocalDateTime())
+													.dueDateTime(dto.getDate())
 													.name(dto.getName())
 													.studyDegree(dto.getPrepareTime())
 													.account(account)
