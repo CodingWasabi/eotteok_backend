@@ -46,7 +46,11 @@ public class CalendarController {
 											exams,
 											LocalDate.now());
 
-		Calendar calendar = calendarService.create(account, tendency, createCalendarRequest.getNickname(), exams);
+		Calendar calendar = calendarService.create(account,
+												   tendency,
+												   createCalendarRequest.getNickname(),
+												   createCalendarRequest.getDailyQuota(),
+												   exams);
 
 		return ResponseEntity.ok(CalendarResponse.builder()
 												 .nickname(createCalendarRequest.getNickname())

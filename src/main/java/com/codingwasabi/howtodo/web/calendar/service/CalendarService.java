@@ -8,7 +8,7 @@ import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
 public interface CalendarService {
 
-	Calendar create(Account account, int tendency, String nickname, List<Exam> exams);
+	Calendar create(Account account, int tendency, String nickname, int dailyQuota,List<Exam> exams);
 
 	Calendar find(Account account);
 }

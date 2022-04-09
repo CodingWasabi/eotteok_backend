@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
-import com.codingwasabi.howtodo.web.policy.util.ExamDateSorting;
 
 public class MostChosenTendencySolution implements TendencySolution {
 	@Override
@@ -41,7 +40,7 @@ public class MostChosenTendencySolution implements TendencySolution {
 
 	@Override
 	public int extractExamsInterval(int dailyQuota, List<Exam> exams, LocalDate today) {
-		List<Exam> sortedExams = sort(exams);
+		List<Exam> sortedExams = sortExams(exams);
 
 		Validator.validate(dailyQuota, sortedExams, today);
 
