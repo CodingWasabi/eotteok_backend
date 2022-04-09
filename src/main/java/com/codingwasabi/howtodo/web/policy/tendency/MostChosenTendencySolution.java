@@ -8,8 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
+@Component
 public class MostChosenTendencySolution implements TendencySolution {
 	@Override
 	public int mostChosen(List<Integer> answers) {
