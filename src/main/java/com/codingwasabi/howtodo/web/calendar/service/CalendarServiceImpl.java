@@ -1,11 +1,13 @@
 package com.codingwasabi.howtodo.web.calendar.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codingwasabi.howtodo.web.policy.planMaking.PlanMakingPolicy;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
@@ -13,7 +15,6 @@ import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.exam.ExamRepository;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
-import com.codingwasabi.howtodo.web.policy.planMaking.PlanMakingPolicy;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,7 +45,7 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	private List<DailyPlan> addDailyPlans(List<Exam> exams, Calendar calendar) {
-		List<DailyPlan> dailyPlans = planMakingPolicy.makeDailyPlans(exams);
+		List<DailyPlan> dailyPlans = planMakingPolicy.makeDailyPlans(exams, LocalDate.now());
 		dailyPlans.forEach(dailyPlan -> calendar.addPlan(dailyPlan));
 
 		return dailyPlans;
