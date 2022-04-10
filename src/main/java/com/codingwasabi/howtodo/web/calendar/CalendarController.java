@@ -40,7 +40,6 @@ public class CalendarController {
 	@PostMapping(value = "/calendar", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<CalendarResponse> createCalendar(@LoginAccount Account account,
 														   @RequestBody CreateCalendarRequest createCalendarRequest) {
-
 		List<Exam> exams = extractExams(account, createCalendarRequest);
 		examService.insertColor(exams);
 

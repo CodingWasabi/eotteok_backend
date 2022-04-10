@@ -20,10 +20,6 @@ public class ExamService {
 		return examRepository.findByAccount(account);
 	}
 
-	public void putExam(Account account, List<Exam> exams) {
-		examRepository.saveAll(exams);
-	}
-
 	public void insertColor(List<Exam> exams) {
 		int color = 0;
 		for (Exam exam : exams) {

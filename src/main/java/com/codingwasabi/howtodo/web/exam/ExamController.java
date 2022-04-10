@@ -39,7 +39,6 @@ public class ExamController {
 	public void putMyExam(@LoginAccount Account account, @RequestBody PutMyExamRequest putMyExamRequest) {
 		List<Exam> exams = new ArrayList<>();
 		examService.remove(account);
-
 		for (PutMyExamRequest.ExamRequest examRequest : putMyExamRequest.getExams()) {
 			exams.add(Exam.builder()
 						  .account(account)

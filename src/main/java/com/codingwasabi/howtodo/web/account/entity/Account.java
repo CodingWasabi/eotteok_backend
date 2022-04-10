@@ -25,6 +25,9 @@ public class Account {
 	private String nickname;
 	@Setter
 	private int tendency;
+	@Setter
+	private int dailyQuota;
+
 	@Enumerated(EnumType.STRING)
 	private Authority authority;
 
