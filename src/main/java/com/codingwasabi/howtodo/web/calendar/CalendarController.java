@@ -66,10 +66,27 @@ public class CalendarController {
 									.map(dto -> Exam.builder()
 													.dueDateTime(dto.getDate())
 													.name(dto.getName())
-													.studyDegree(dto.getPrepareTime())
+													.studyDegree(extractStudyDegree(dto))
 													.account(account)
 													.build())
 									.collect(Collectors.toList());
+	}
+
+	private int extractStudyDegree(CreateCalendarRequest.ExamInfo dto) {
+		switch (dto.getPrepareTime()) {
+			case 1:
+				return 10;
+			case 2:
+				return 20;
+			case 3:
+				return 30;
+			case 4:
+				return 40;
+			case 5:
+				return 50;
+			default:
+				throw new IllegalArgumentException("studyDegree accept only 1~5");
+		}
 	}
 
 	@GetMapping(value = "/my/calendar/result", produces = APPLICATION_JSON_VALUE)
