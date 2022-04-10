@@ -15,6 +15,7 @@ import com.codingwasabi.howtodo.web.account.entity.Account;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -30,15 +31,16 @@ public class Exam {
 	private String name;
 	private LocalDateTime dueDateTime;
 	private int studyDegree;
+
+	@Setter
 	private int color;
 
 	@Builder
-	private Exam(Account account, String name, LocalDateTime dueDateTime, int studyDegree, int color) {
+	private Exam(Account account, String name, LocalDateTime dueDateTime, int studyDegree) {
 		this.account = account;
 		this.name = name;
 		this.dueDateTime = dueDateTime;
 		this.studyDegree = studyDegree;
-		this.color = color;
 	}
 
 	public int getDDay(LocalDate today) {

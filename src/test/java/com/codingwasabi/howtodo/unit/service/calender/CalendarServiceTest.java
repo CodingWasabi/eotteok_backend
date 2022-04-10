@@ -38,7 +38,8 @@ public class CalendarServiceTest extends ServiceUnitTest {
 		Account account = Account.Anonymous;
 		List<DailyPlan> dailyPlans = List.of(DailyPlan_생성(account), DailyPlan_생성(account));
 		willReturn(dailyPlans).given(planMakingPolicy)
-							  .makeDailyPlans(any(), any(), any(), any());
+							  .makeDailyPlans(any(), any(), any(), any(Integer.class));
+
 		// when
 		Calendar calendar = calendarService.create(account, 3, "daehwan", 10, List.of(Exam_생성("물리", 2022, 4, 9)));
 		// then
@@ -54,7 +55,7 @@ public class CalendarServiceTest extends ServiceUnitTest {
 		Account account = Account_생성();
 		List<DailyPlan> dailyPlans = List.of(DailyPlan_생성(account), DailyPlan_생성(account));
 		willReturn(dailyPlans).given(planMakingPolicy)
-							  .makeDailyPlans(any(), any(), any(), any());
+							  .makeDailyPlans(any(), any(), any(), any(Integer.class));
 
 		// when
 		Calendar calendar = calendarService.create(account, 3, "daehwan", 10, List.of(Exam_생성("물리", 2022, 4, 9)));

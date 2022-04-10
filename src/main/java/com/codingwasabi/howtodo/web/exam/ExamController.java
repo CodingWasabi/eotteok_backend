@@ -24,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class ExamController {
-	
 	private final ExamService examService;
 	
 	@GetMapping("/my/exams")
@@ -39,20 +38,16 @@ public class ExamController {
 	@PutMapping("/my/exams")
 	public void putMyExam(@LoginAccount Account account, @RequestBody PutMyExamRequest putMyExamRequest) {
 		List<Exam> exams = new ArrayList<>();
-		int index = 0;
 		for (PutMyExamRequest.ExamRequest subjectRequest : putMyExamRequest.getSubjects()) {
 			exams.add(Exam.builder()
 						  .account(account)
 						  .name(subjectRequest.getName())
 						  .dueDateTime(subjectRequest.getDate())
 						  .studyDegree(subjectRequest.getPrepareTime())
-						  .color(++index)
 						  .build());
 		}
-		
+		examService.insertColor(exams);
 		examService.putExam(account, exams);
-		
-		return;
 	}
 	
 }

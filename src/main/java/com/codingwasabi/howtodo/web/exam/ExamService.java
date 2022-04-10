@@ -14,15 +14,22 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ExamService {
-	
+
 	private final ExamRepository examRepository;
-	
+
 	public List<Exam> getMyExam(Account account) {
 		return examRepository.findByAccount(account);
 	}
-	
+
 	public void putExam(Account account, List<Exam> exam) {
 		examRepository.deleteAll(examRepository.findByAccount(account));
 		examRepository.saveAll(exam);
+	}
+
+	public void insertColor(List<Exam> exams) {
+		int color = 0;
+		for (Exam exam : exams) {
+			exam.setColor(color++);
+		}
 	}
 }

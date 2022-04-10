@@ -22,6 +22,7 @@ import com.codingwasabi.howtodo.web.calendar.dto.CalendarResponse;
 import com.codingwasabi.howtodo.web.calendar.dto.CreateCalendarRequest;
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.calendar.service.CalendarService;
+import com.codingwasabi.howtodo.web.exam.ExamService;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 import com.codingwasabi.howtodo.web.policy.tendency.TendencyPolicy;
 
@@ -33,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class CalendarController {
 	private final CalendarService calendarService;
 	private final AccountService accountService;
+	private final ExamService examService;
 	private final TendencyPolicy tendencyPolicy;
 
 	@PostMapping(value = "/calendar", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
@@ -40,6 +42,7 @@ public class CalendarController {
 														   @RequestBody CreateCalendarRequest createCalendarRequest) {
 
 		List<Exam> exams = extractExams(account, createCalendarRequest);
+		examService.insertColor(exams);
 
 		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers(),
 											createCalendarRequest.getDailyQuota(),

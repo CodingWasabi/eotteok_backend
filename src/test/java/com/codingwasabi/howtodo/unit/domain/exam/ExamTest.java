@@ -32,13 +32,11 @@ public class ExamTest {
 						.account(account)
 						.dueDateTime(LocalDateTime.now())
 						.studyDegree(3)
-						.color(3)
 						.build();
 
 		// then
 		assertThat(exam.getName()).isEqualTo("과목");
 		assertThat(exam.getStudyDegree()).isEqualTo(3);
-		assertThat(exam.getColor()).isEqualTo(3);
 	}
 
 	@DisplayName("과목 d-day 구하기")
