@@ -28,7 +28,9 @@ public class ExamController {
 
 	@GetMapping("/my/exams")
 	public GetMyExamResponse getMyExam(@LoginAccount Account account) {
-
+		if(account.isAnonymous()) {
+			throw new IllegalStateException("need authenticate before retrieve my exam");
+		}
 		return new GetMyExamResponse(examService.getMyExam(account)
 												.stream()
 												.map(ExamResponse::new)

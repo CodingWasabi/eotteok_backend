@@ -38,14 +38,13 @@ public class CommentController {
 	}
 
 	@PostMapping("/calendar/{accountId}/result/comments/{targetDate}")
-	public ResponseEntity<String> createComments(@LoginAccount Account account,
+	public ResponseEntity<Void> createComments(@LoginAccount Account account,
 												 @PathVariable("accountId") Long accountId,
 												 @PathVariable("targetDate") @DateTimeFormat(pattern = "yyyy-MM-dd")
 													 LocalDate date,
 												 @RequestBody CreateCommentsRequest createCommentsRequest) {
 		if (account.isAnonymous()) {
-			return ResponseEntity.badRequest()
-								 .body("need authenticate before write comment");
+			throw new IllegalStateException("need authenticate before write comment");
 		}
 
 		Comment comment = Comment.builder()
