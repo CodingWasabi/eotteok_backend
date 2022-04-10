@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutMyExamRequest {
 	
-	List<ExamRequest> subjects;
+	List<ExamRequest> exams;
 	
 	@Getter
 	@Setter
@@ -26,7 +26,7 @@ public class PutMyExamRequest {
 	public static class ExamRequest {
 		private String name;
 		
-		@JsonFormat(pattern = "yyyy/MM/dd kk:mm")
+		@JsonFormat(pattern = "yyyy/MM/dd hh:mm")
 		private LocalDateTime date;
 		
 		private int prepareTime;

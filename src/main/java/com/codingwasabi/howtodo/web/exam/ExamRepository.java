@@ -10,4 +10,6 @@ import com.codingwasabi.howtodo.web.exam.entity.Exam;
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 
 	List<Exam> findByAccount(Account account);
+
+	void deleteAllByAccount(Account account);
 }

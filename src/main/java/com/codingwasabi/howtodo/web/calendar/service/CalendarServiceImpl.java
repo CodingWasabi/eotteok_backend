@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CalendarServiceImpl implements CalendarService {
 	private final CalendarRepository calendarRepository;
-	private final ExamRepository subjectRepository;
+	private final ExamRepository examRepository;
 	private final DailyPlanRepository dailyPlanRepository;
 	private final PlanMakingPolicy planMakingPolicy;
 
@@ -39,7 +39,7 @@ public class CalendarServiceImpl implements CalendarService {
 		account.setNickname(nickname);
 		account.setTendency(tendency);
 		dailyPlanRepository.saveAll(dailyPlans);
-		subjectRepository.saveAll(exams);
+		examRepository.saveAll(exams);
 		calendarRepository.save(calendar);
 		return calendar;
 	}
