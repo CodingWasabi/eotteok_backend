@@ -24,12 +24,12 @@ public class GetCommentsByUserIdResponse {
 	@NoArgsConstructor
 	@Builder
 	public static class CommentResponse {
-		private int profileNumber;
+		private int profileImageNumber;
 		private String nickname;
 		private String body;
 		
 		public CommentResponse(Comment comment) {
-			this.profileNumber = comment.getProfileNumber();
+			this.profileImageNumber = comment.getProfileNumber();
 			this.nickname = comment.getAccount().getNickname();
 			this.body = comment.getBody();
 		}

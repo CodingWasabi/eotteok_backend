@@ -23,8 +23,8 @@ public class CommentService {
 	private final CommentRepository commentRepository;
 	private final DailyPlanRepository dailyPlanRepository;
 	
-	public List<Comment> getCommentsByAccountIdAndDate(Long accountId, LocalDate localDate) {
-		return commentRepository.findCommentByAccountIdAndDate(accountId, localDate);
+	public List<Comment> getCommentsByAccountIdAndDate(Long accountId, LocalDate date) {
+		return commentRepository.findCommentByAccountIdAndDate(accountId, date);
 	}
 	
 	@Transactional

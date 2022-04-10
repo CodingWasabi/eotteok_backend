@@ -19,7 +19,7 @@ import com.codingwasabi.howtodo.web.policy.planMaking.PlanMakingPolicy;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CalendarServiceImpl implements CalendarService {
 	private final CalendarRepository calendarRepository;
@@ -28,6 +28,7 @@ public class CalendarServiceImpl implements CalendarService {
 	private final PlanMakingPolicy planMakingPolicy;
 
 	@Override
+	@Transactional
 	public Calendar create(Account account, int tendency, String nickname, int dailyQuota, List<Exam> exams) {
 		Calendar calendar = new Calendar(account);
 		List<DailyPlan> dailyPlans = addDailyPlans(account, exams, calendar, dailyQuota);
@@ -53,7 +54,6 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Calendar find(Account account) {
 		return calendarRepository.findByAccount(account)
 								 .orElseThrow(() -> new AccessDeniedException("no data"));
