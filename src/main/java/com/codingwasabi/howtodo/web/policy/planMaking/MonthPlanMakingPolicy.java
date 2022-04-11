@@ -3,6 +3,7 @@ package com.codingwasabi.howtodo.web.policy.planMaking;
 import static com.codingwasabi.howtodo.web.policy.util.ExamDateSorting.*;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -143,13 +144,17 @@ public class MonthPlanMakingPolicy implements PlanMakingPolicy {
 		LocalDate endDate = exams.get(exams.size() - 1)
 								 .getDueDateTime()
 								 .toLocalDate();
+		int days = getDays(today, endDate);
 
-		for (int day = 1; day < today.until(endDate)
-									 .getDays(); day++) {
+		for (int day = 1; day < days; day++) {
 			nextDay = nextDay.plusDays(1);
 			dailyHours.put(nextDay, 0);
 		}
 
 		return dailyHours;
+	}
+
+	private int getDays(LocalDate start, LocalDate end) {
+		return (int)ChronoUnit.DAYS.between(start, end);
 	}
 }
