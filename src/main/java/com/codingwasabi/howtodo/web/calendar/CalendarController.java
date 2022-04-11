@@ -103,7 +103,7 @@ public class CalendarController {
 												 .build());
 	}
 
-	@GetMapping(value = "/calendar/{userId}/comments", produces = APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/calendar/{userId}/result", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<CalendarResponse> getOtherCalendarResponse(@PathVariable("userId") Long userId) {
 		Account account = accountService.findAccount(userId);
 		Calendar calendar = calendarService.find(account);
