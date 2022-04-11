@@ -7,6 +7,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codingwasabi.howtodo.web.account.AccountRepository;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
@@ -26,6 +27,7 @@ public class CalendarServiceImpl implements CalendarService {
 	private final ExamRepository examRepository;
 	private final DailyPlanRepository dailyPlanRepository;
 	private final PlanMakingPolicy planMakingPolicy;
+	private final AccountRepository accountRepository;
 
 	@Override
 	@Transactional
@@ -40,6 +42,8 @@ public class CalendarServiceImpl implements CalendarService {
 		account.setDailyQuota(dailyQuota);
 		account.setNickname(nickname);
 		account.setTendency(tendency);
+		
+		accountRepository.save(account);
 		dailyPlanRepository.saveAll(dailyPlans);
 		examRepository.saveAll(exams);
 		calendarRepository.save(calendar);
