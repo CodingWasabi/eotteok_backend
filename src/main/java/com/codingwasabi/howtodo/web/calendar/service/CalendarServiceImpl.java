@@ -42,7 +42,7 @@ public class CalendarServiceImpl implements CalendarService {
 		account.setDailyQuota(dailyQuota);
 		account.setNickname(nickname);
 		account.setTendency(tendency);
-		
+
 		accountRepository.save(account);
 		dailyPlanRepository.saveAll(dailyPlans);
 		examRepository.saveAll(exams);
