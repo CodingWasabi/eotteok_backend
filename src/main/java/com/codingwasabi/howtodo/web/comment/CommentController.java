@@ -23,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class CommentController {
-
 	private final CommentService commentService;
 
 	@GetMapping("/calendar/{accountId}/result/comments")
@@ -39,10 +38,10 @@ public class CommentController {
 
 	@PostMapping("/calendar/{accountId}/result/comments/{targetDate}")
 	public ResponseEntity<Void> createComments(@LoginAccount Account account,
-												 @PathVariable("accountId") Long accountId,
-												 @PathVariable("targetDate") @DateTimeFormat(pattern = "yyyy-MM-dd")
-													 LocalDate date,
-												 @RequestBody CreateCommentsRequest createCommentsRequest) {
+											   @PathVariable("accountId") Long accountId,
+											   @PathVariable("targetDate") @DateTimeFormat(pattern = "yyyy-MM-dd")
+												   LocalDate date,
+											   @RequestBody CreateCommentsRequest createCommentsRequest) {
 		if (account.isAnonymous()) {
 			throw new IllegalStateException("need authenticate before write comment");
 		}

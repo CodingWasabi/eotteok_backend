@@ -11,6 +11,6 @@ import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
 public interface DailyPlanRepository extends JpaRepository<DailyPlan, Long> {
-	@Query("select dp from DailyPlan dp where dp.account=:accountId and dp.date=:date")
+	@Query("select dp from DailyPlan dp where dp.account.id=:accountId and dp.date=:date")
 	Optional<DailyPlan> findByAccountIdAndDate(@Param("accountId") long accountId, @Param("date") LocalDate localDate);
 }
