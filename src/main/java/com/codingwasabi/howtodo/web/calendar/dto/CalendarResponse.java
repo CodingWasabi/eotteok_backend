@@ -20,6 +20,8 @@ public class CalendarResponse {
 
 	private int tendency;
 
+	private Long accountId;
+
 	private List<ExamInfo> exams;
 
 	private List<MonthToDoInfo> calendar;

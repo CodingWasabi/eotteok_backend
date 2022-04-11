@@ -93,13 +93,14 @@ public class CalendarController {
 
 	@GetMapping(value = "/my/calendar/result", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<CalendarResponse> getMyCalenderResponse(@LoginAccount Account account) {
-		if(account.isAnonymous()) {
+		if (account.isAnonymous()) {
 			throw new IllegalStateException("need authentication to retrieve self result");
 		}
 		Calendar calendar = calendarService.find(account);
 
 		return ResponseEntity.ok(CalendarResponse.builder()
 												 .nickname(account.getNickname())
+												 .accountId(account.getId())
 												 .tendency(account.getTendency())
 												 .exams(convertExamInfos(calendar))
 												 .calendar(convertMonthToDoInfo(calendar))
