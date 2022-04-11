@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.4'
+	id 'org.springframework.boot' version '2.6.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -19,11 +19,11 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.5'
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.5'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.5'
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.5'
 
 	// datasource
 	runtimeOnly 'com.h2database:h2'
