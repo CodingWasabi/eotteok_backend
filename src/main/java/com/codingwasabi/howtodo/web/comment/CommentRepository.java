@@ -11,7 +11,7 @@ import com.codingwasabi.howtodo.web.comment.entity.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 	
-	@Query("select c from Comment c where c.dailyPlan.calendar.account=:accountId and c.dailyPlan.date=:date")
-	List<Comment> findCommentByAccountIdAndDate(@Param("accountId") long accountId, @Param("date")LocalDate localDate);
+	@Query("select c from Comment c where c.dailyPlan.calendar.account.id=:accountId and c.dailyPlan.date=:date")
+	List<Comment> findCommentByAccountIdAndDate(Long accountId, LocalDate date);
 }
 
