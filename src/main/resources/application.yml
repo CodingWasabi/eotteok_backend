@@ -17,6 +17,6 @@ server:
       timeout: 15m
       cookie:
         http-only: true
-        secure: true
-        domain: localhost # 변경 해야함
+        # secure: true
+        # domain: localhost # 변경 해야함
         same-site: lax

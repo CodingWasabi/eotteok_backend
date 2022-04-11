@@ -16,6 +16,8 @@ public class OAuth2AuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request,
 										HttpServletResponse response,
 										AuthenticationException exception) throws IOException, ServletException {
-		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		response.sendRedirect("/oauth/authorize/kakao");
+		//response.getWriter().write("Hi");
+		//response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	}
 }
