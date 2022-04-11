@@ -3,6 +3,7 @@ package com.codingwasabi.howtodo.web.account;
 import static org.springframework.http.HttpStatus.*;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,5 +33,11 @@ public class AccountController {
 	@GetMapping("/me")
 	ResponseEntity<String> get(@LoginAccount Account account) {
 		return ResponseEntity.ok(account.getEmail() + " : " + account.getProvider());
+	}
+
+	@DeleteMapping("/me")
+	ResponseEntity<Void> reset(@LoginAccount Account account) {
+		accountService.reset(account);
+		return ResponseEntity.noContent().build();
 	}
 }

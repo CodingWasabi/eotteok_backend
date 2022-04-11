@@ -38,10 +38,10 @@ public class DailyPlan {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Account account;
 
-	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ToDo> toDos = new ArrayList<>();
 
-	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Setter

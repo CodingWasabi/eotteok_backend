@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
+import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
+import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 	private final AccountRepository accountRepository;
+	private final CalendarRepository calendarRepository;
 
 	@Override
 	public Account findAccount(Long accountId) {
@@ -23,5 +27,10 @@ public class AccountServiceImpl implements AccountService {
 	@Transactional(readOnly = true)
 	public boolean isValidNickname(String nickname) {
 		return !accountRepository.existsByNickname(nickname);
+	}
+
+	@Override
+	public void reset(Account account) {
+		calendarRepository.deleteByAccount(account);
 	}
 }

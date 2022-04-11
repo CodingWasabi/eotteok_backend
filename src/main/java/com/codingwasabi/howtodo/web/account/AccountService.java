@@ -6,4 +6,6 @@ public interface AccountService {
 	Account findAccount(Long userId);
 
 	boolean isValidNickname(String nickname);
+
+	void reset(Account account);
 }
