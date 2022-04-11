@@ -30,7 +30,7 @@ public class CommentService {
 	@Transactional
 	public void saveComment(Long accountId, LocalDate localDate, Comment comment) {
 		DailyPlan dailyPlan = dailyPlanRepository.findByAccountIdAndDate(accountId, localDate)
-												 .orElseThrow();
+												 .orElseThrow(() -> new IllegalArgumentException("account or date not found"));
 		dailyPlan.addComment(comment);
 	}
 }
