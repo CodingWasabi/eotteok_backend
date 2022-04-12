@@ -1,6 +1,6 @@
 package com.codingwasabi.howtodo.web.policy.tendency;
 
-import static com.codingwasabi.howtodo.web.policy.util.ExamDateSorting.*;
+import static com.codingwasabi.howtodo.web.policy.util.DateProcessor.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -121,16 +121,15 @@ public class MostChosenTendencySolution implements TendencySolution {
 		LocalDate beforeDay = null;
 
 		for (Exam exam : sortedExams) {
+			LocalDate examDate = exam.getDueDateTime()
+									 .toLocalDate();
+
 			if (beforeDay == null) {
-				beforeDay = exam.getDueDateTime()
-								.toLocalDate();
+				beforeDay = examDate;
 				continue;
 			}
 
-			if (Math.abs(exam.getDueDateTime()
-							 .toLocalDate()
-							 .until(beforeDay)
-							 .getDays()) != 1) {
+			if (calculateDDay(beforeDay, examDate) != 1) {
 				return false;
 			}
 			beforeDay = exam.getDueDateTime()

@@ -1,6 +1,6 @@
 package com.codingwasabi.howtodo.web.policy.planMaking;
 
-import static com.codingwasabi.howtodo.web.policy.util.ExamDateSorting.*;
+import static com.codingwasabi.howtodo.web.policy.util.DateProcessor.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.policy.util.DateProcessor;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -44,8 +45,7 @@ public class Exam {
 	}
 
 	public int getDDay(LocalDate today) {
-		return today.until(dueDateTime.toLocalDate())
-					.getDays();
+		return DateProcessor.calculateDDay(today, dueDateTime.toLocalDate());
 	}
 
 	public boolean isMid() {

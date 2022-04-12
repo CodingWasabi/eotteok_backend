@@ -2,13 +2,14 @@ package com.codingwasabi.howtodo.web.policy.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
-public class ExamDateSorting {
+public class DateProcessor {
 	public static List<Exam> sortExams(List<Exam> exams) {
 		return exams.stream()
 					.sorted((e1, e2) -> {
@@ -37,5 +38,9 @@ public class ExamDateSorting {
 							 return 0;
 						 })
 						 .collect(Collectors.toList());
+	}
+
+	public static int calculateDDay(LocalDate start, LocalDate end) {
+		return (int)ChronoUnit.DAYS.between(start, end);
 	}
 }
