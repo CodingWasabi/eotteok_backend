@@ -12,5 +12,5 @@ server:
       cookie:
         http-only: true
         # secure: true
-        # domain: localhost # 변경 해야함
+        domain: localhost:3000
         same-site: lax

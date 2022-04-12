@@ -16,6 +16,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 	public void onAuthenticationSuccess(HttpServletRequest request,
 										HttpServletResponse response,
 										Authentication authentication) throws IOException, ServletException {
-		response.setStatus(HttpServletResponse.SC_OK);
+		response.encodeRedirectURL("http://localhost:3000/result");
+		// response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
