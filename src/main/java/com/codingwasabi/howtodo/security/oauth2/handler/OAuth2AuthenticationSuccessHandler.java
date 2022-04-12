@@ -25,8 +25,10 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 								  .findAny()
 								  .get()
 								  .getValue();
-
-		response.addCookie(new Cookie("localhost", requestCookie));
+		Cookie jsessionid = new Cookie("JSESSIONID", requestCookie);
+		jsessionid.setDomain("localhost");
+		
+		response.addCookie(jsessionid);
 		// response.encodeURL("http://localhost:3000/result");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
