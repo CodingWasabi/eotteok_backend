@@ -3,8 +3,7 @@ spring:
     include: env
   jpa:
     hibernate:
-      ddl-auto: create
-    generate-ddl: true
+      ddl-auto: update
     
 server:
   servlet:
