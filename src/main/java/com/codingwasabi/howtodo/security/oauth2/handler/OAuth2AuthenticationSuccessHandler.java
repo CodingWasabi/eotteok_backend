@@ -18,7 +18,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 	public void onAuthenticationSuccess(HttpServletRequest request,
 										HttpServletResponse response,
 										Authentication authentication) throws IOException, ServletException {
-		response.encodeRedirectURL("https://naver.com");
+		response.sendRedirect("/redirect");
 		// response.encodeURL("http://localhost:3000/result");
 		// response.setStatus(HttpServletResponse.SC_OK);
 	}

@@ -126,7 +126,7 @@ public class CalendarController {
 
 	@RequestMapping("/redirect")
 	public ResponseEntity<Void> redirect() throws URISyntaxException {
-		URI redirectUri = new URI("http://www.naver.com");
+		URI redirectUri = new URI("http://3.34.94.220:3000/result");
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(redirectUri);
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
