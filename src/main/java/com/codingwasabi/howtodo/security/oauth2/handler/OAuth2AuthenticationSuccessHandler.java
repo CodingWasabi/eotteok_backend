@@ -18,18 +18,8 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 	public void onAuthenticationSuccess(HttpServletRequest request,
 										HttpServletResponse response,
 										Authentication authentication) throws IOException, ServletException {
-		// response.encodeRedirectURL("http://localhost:3000/result");
-		String requestCookie = Arrays.stream(request.getCookies())
-								  .filter(cookie -> cookie.getName()
-														  .equals("JSESSIONID"))
-								  .findAny()
-								  .get()
-								  .getValue();
-		Cookie jsessionid = new Cookie("JSESSIONID", requestCookie);
-		jsessionid.setDomain("localhost");
-		
-		response.addCookie(jsessionid);
+		response.sendRedirect("/redirect");
 		// response.encodeURL("http://localhost:3000/result");
-		response.setStatus(HttpServletResponse.SC_OK);
+		// response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
