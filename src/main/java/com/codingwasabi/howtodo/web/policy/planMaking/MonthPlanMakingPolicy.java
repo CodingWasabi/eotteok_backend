@@ -30,6 +30,29 @@ public class MonthPlanMakingPolicy implements PlanMakingPolicy {
 			fillPlan(account, dailyHours, dailyPlans, examDate, exam, today, dailyQuota);
 		}
 
+		for (Exam exam : sortedExams) {
+			LocalDate examDate = exam.getDueDateTime()
+									 .toLocalDate();
+
+			DailyPlan examDayPlan = dailyPlans.stream()
+											  .filter(dailyPlan -> dailyPlan.getDate()
+																			.equals(examDate))
+											  .findAny()
+											  .orElseGet(() -> {
+												  DailyPlan dailyPlan = DailyPlan.builder()
+																				 .account(account)
+																				 .date(examDate)
+																				 .build();
+												  dailyPlans.add(dailyPlan);
+												  return dailyPlan;
+											  });
+
+			examDayPlan.addToDo(ToDo.builder()
+									.hour(0)
+									.exam(exam)
+									.build());
+		}
+
 		return sortDailyPlans(dailyPlans);
 	}
 
