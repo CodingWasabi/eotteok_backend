@@ -69,7 +69,14 @@ public class CalenderResponseConverter {
 																						   toDo.getHour(),
 																						   toDo.getDDay(),
 																						   toDo.getExam()
-																							   .getColor()))
+																							   .getColor(),
+																						   toDo.getExam()
+																							   .getDueDateTime()
+																							   .getMonth()
+																							   .getValue(),
+																						   toDo.getExam()
+																							   .getDueDateTime()
+																							   .getDayOfMonth()))
 					.collect(Collectors.toList());
 	}
 }

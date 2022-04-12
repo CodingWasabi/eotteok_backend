@@ -68,6 +68,8 @@ public class CalendarResponse {
 				private double hour;
 				private int d_day;
 				private int color;
+				private int month;
+				private int date;
 			}
 		}
 
