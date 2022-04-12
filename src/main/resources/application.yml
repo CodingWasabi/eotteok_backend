@@ -12,5 +12,6 @@ server:
       cookie:
         http-only: true
         # secure: true
-        domain: localhost:3000
+        domain: localhost
         same-site: lax
+
