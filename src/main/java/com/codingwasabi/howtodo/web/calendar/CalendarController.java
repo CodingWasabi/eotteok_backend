@@ -3,10 +3,14 @@ package com.codingwasabi.howtodo.web.calendar;
 import static com.codingwasabi.howtodo.web.calendar.utils.CalenderResponseConverter.*;
 import static org.springframework.http.MediaType.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -118,5 +122,13 @@ public class CalendarController {
 												 .exams(convertExamInfos(calendar))
 												 .calendar(convertMonthToDoInfo(calendar))
 												 .build());
+	}
+
+	@RequestMapping("/redirect")
+	public ResponseEntity<Void> redirect() throws URISyntaxException {
+		URI redirectUri = new URI("http://www.naver.com");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setLocation(redirectUri);
+		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 	}
 }
