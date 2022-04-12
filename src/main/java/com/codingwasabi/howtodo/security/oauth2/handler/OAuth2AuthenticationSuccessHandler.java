@@ -27,7 +27,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 								  .getValue();
 
 		response.addCookie(new Cookie("localhost:3000", requestCookie));
-		response.encodeURL("http://localhost:3000/result");
-		// response.setStatus(HttpServletResponse.SC_OK);
+		// response.encodeURL("http://localhost:3000/result");
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
