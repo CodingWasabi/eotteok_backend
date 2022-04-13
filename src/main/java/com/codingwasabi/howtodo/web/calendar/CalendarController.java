@@ -47,7 +47,7 @@ public class CalendarController {
 		List<Exam> exams = extractExams(account, createCalendarRequest);
 		examService.insertColor(exams);
 
-		if (calendarService.alreadyExist(account)) {
+		if (!account.isAnonymous() && calendarService.alreadyExist(account)) {
 			throw new IllegalStateException("user already has calendar date, need initialize");
 		}
 
