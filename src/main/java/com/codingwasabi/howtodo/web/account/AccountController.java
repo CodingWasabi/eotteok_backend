@@ -31,13 +31,18 @@ public class AccountController {
 
 	// 배포 테스트 용 API
 	@GetMapping("/me")
-	ResponseEntity<String> get(@LoginAccount Account account) {
-		return ResponseEntity.ok(account.getEmail() + " : " + account.getProvider());
+	ResponseEntity<Long> get(@LoginAccount Account account) {
+		if (account.isAnonymous()) {
+			return ResponseEntity.status(UNAUTHORIZED)
+								 .build();
+		}
+		return ResponseEntity.ok(account.getId());
 	}
 
 	@DeleteMapping("/me")
 	ResponseEntity<Void> reset(@LoginAccount Account account) {
 		accountService.reset(account);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.noContent()
+							 .build();
 	}
 }
