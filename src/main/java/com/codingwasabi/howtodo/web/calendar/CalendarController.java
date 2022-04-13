@@ -60,6 +60,7 @@ public class CalendarController {
 
 		return ResponseEntity.ok(CalendarResponse.builder()
 												 .nickname(createCalendarRequest.getNickname())
+												 .accountId(account.getId())
 												 .tendency(tendency)
 												 .exams(convertExamInfos(calendar))
 												 .calendar(convertMonthToDoInfo(calendar))
