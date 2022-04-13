@@ -11,4 +11,6 @@ public interface CalendarService {
 	Calendar create(Account account, int tendency, String nickname, int dailyQuota,List<Exam> exams);
 
 	Calendar find(Account account);
+
+	boolean alreadyExist(Account account);
 }

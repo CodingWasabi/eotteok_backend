@@ -62,4 +62,9 @@ public class CalendarServiceImpl implements CalendarService {
 		return calendarRepository.findByAccount(account)
 								 .orElseThrow(() -> new AccessDeniedException("no data"));
 	}
+
+	@Override
+	public boolean alreadyExist(Account account) {
+		return calendarRepository.existsByAccount(account);
+	}
 }

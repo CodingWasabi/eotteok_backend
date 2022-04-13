@@ -14,4 +14,6 @@ public interface CalendarRepository extends JpaRepository<Calendar, Long> {
 	Optional<Calendar> findByAccount(Account account);
 
 	void deleteByAccount(Account account);
+
+	boolean existsByAccount(Account account);
 }
