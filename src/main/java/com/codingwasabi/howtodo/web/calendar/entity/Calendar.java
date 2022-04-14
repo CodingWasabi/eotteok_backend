@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
@@ -36,6 +37,9 @@ public class Calendar {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Account account;
+
+	@OneToMany(mappedBy = "calendar", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<Comment> comments = new ArrayList<>();
 
 	public Calendar(Account account) {
 		this.account = account;

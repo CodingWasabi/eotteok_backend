@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -24,12 +25,16 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Account account;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Calendar calendar;
+
 	private int profileNumber;
 	private String body;
 
 	@Builder
-	private Comment(Account account, int profileNumber, String body) {
+	private Comment(Account account, Calendar calendar, int profileNumber, String body) {
 		this.account = account;
+		this.calendar = calendar;
 		this.profileNumber = profileNumber;
 		this.body = body;
 	}
