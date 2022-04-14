@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -89,5 +90,11 @@ public class Calendar {
 		return (int)comments.stream()
 							.filter(comment -> comment.isDate(date))
 							.count();
+	}
+
+	public List<Comment> getComments(int month) {
+		return comments.stream()
+					   .filter(comment -> comment.isMonth(month))
+					   .collect(Collectors.toList());
 	}
 }
