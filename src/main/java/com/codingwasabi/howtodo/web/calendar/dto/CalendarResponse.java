@@ -48,7 +48,17 @@ public class CalendarResponse {
 	public static class MonthToDoInfo {
 		private int month;
 		private int commentCount;
+		private List<DailyCommentCount> dailyCommentsCount;
 		private List<DailyToDoInfo> toDos;
+
+		@Getter
+		@Setter
+		@AllArgsConstructor
+		@NoArgsConstructor
+		public static class DailyCommentCount {
+			private LocalDate date;
+			private int count;
+		}
 
 		@Getter
 		@Setter
@@ -56,7 +66,6 @@ public class CalendarResponse {
 		@NoArgsConstructor
 		public static class DailyToDoInfo {
 			private LocalDate date;
-			private int commentCount;
 			private List<TodoInfo> toDos;
 
 			@Getter

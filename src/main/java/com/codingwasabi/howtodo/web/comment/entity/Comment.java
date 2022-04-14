@@ -1,5 +1,7 @@
 package com.codingwasabi.howtodo.web.comment.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,14 +30,22 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Calendar calendar;
 
+	private LocalDate date;
+
 	private int profileNumber;
+
 	private String body;
 
 	@Builder
-	private Comment(Account account, Calendar calendar, int profileNumber, String body) {
+	private Comment(Account account, Calendar calendar, int profileNumber, String body, LocalDate date) {
 		this.account = account;
 		this.calendar = calendar;
 		this.profileNumber = profileNumber;
 		this.body = body;
+		this.date = date;
+	}
+
+	public boolean isDate(LocalDate date) {
+		return this.date.isEqual(date);
 	}
 }

@@ -1,5 +1,6 @@
 package com.codingwasabi.howtodo.web.calendar.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,7 +39,7 @@ public class Calendar {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Account account;
 
-	@OneToMany(mappedBy = "calendar", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 
 	public Calendar(Account account) {
@@ -48,6 +49,10 @@ public class Calendar {
 	public void addPlan(DailyPlan dailyPlan) {
 		dailyPlans.add(dailyPlan);
 		dailyPlan.setCalendar(this);
+	}
+
+	public void addComment(Comment comment) {
+		comments.add(comment);
 	}
 
 	public Set<Exam> getExams() {
@@ -71,5 +76,16 @@ public class Calendar {
 		});
 
 		return monthPlans;
+	}
+
+	public int getCommentCount() {
+		return comments.size();
+	}
+
+	public int getCommentCount(DailyPlan dailyPlan) {
+		LocalDate date = dailyPlan.getDate();
+		return (int)comments.stream()
+							.filter(comment -> comment.isDate(date))
+							.count();
 	}
 }

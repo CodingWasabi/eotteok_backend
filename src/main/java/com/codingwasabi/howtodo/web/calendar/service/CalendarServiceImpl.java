@@ -67,4 +67,10 @@ public class CalendarServiceImpl implements CalendarService {
 	public boolean alreadyExist(Account account) {
 		return calendarRepository.existsByAccount(account);
 	}
+
+	@Override
+	public Calendar findByAccountId(Long accountId) {
+		return calendarRepository.findByAccountId(accountId)
+								 .orElseThrow(() -> new IllegalStateException("not valid user's calendar"));
+	}
 }

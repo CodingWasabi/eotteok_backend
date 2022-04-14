@@ -13,4 +13,6 @@ public interface CalendarService {
 	Calendar find(Account account);
 
 	boolean alreadyExist(Account account);
+
+	Calendar findByAccountId(Long accountId);
 }
