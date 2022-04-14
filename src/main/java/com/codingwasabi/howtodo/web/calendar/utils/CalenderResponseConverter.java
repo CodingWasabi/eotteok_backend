@@ -37,27 +37,28 @@ public class CalenderResponseConverter {
 				.entrySet()
 				.forEach(entry -> {
 					monthToDoInfos.add(new CalendarResponse.MonthToDoInfo(entry.getKey(),
-																		  getMonthCommentCount(entry.getValue()),
-																		  getDailyToDoInfoList(entry.getValue())));
+																		  calendar.getCommentCount(),
+																		  getDailyCommentsCount(calendar),
+																		  getDailyToDoInfoList(calendar,
+																							   entry.getValue())));
 				});
 
 		return monthToDoInfos;
 	}
 
-	private static Integer getMonthCommentCount(List<DailyPlan> dailyPlans) {
-		int commentCount = 0;
-		for (DailyPlan dailyPlan : dailyPlans) {
-			commentCount += dailyPlan.getComments()
-									 .size();
-		}
-		return commentCount;
+	private static List<CalendarResponse.MonthToDoInfo.DailyCommentCount> getDailyCommentsCount(Calendar calendar) {
+		return calendar.getDailyPlans()
+					   .stream()
+					   .map(dailyPlan -> new CalendarResponse.MonthToDoInfo.DailyCommentCount(dailyPlan.getDate(),
+																							  calendar.getCommentCount(
+																								  dailyPlan)))
+					   .collect(Collectors.toList());
 	}
 
-	private static List<CalendarResponse.MonthToDoInfo.DailyToDoInfo> getDailyToDoInfoList(List<DailyPlan> dailyPlans) {
+	private static List<CalendarResponse.MonthToDoInfo.DailyToDoInfo> getDailyToDoInfoList(Calendar calendar,
+																						   List<DailyPlan> dailyPlans) {
 		return dailyPlans.stream()
 						 .map(dailyPlan -> new CalendarResponse.MonthToDoInfo.DailyToDoInfo(dailyPlan.getDate(),
-																							dailyPlan.getComments()
-																									 .size(),
 																							getToDoInfoList(dailyPlan.getToDos())))
 						 .collect(Collectors.toList());
 	}

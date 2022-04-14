@@ -16,9 +16,8 @@ import javax.persistence.OneToMany;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
-import com.codingwasabi.howtodo.web.comment.entity.Comment;
-import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
+import com.codingwasabi.howtodo.web.todo.entity.ToDo;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -41,9 +40,6 @@ public class DailyPlan {
 	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ToDo> toDos = new ArrayList<>();
 
-	@OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Comment> comments = new ArrayList<>();
-
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Calendar calendar;
@@ -57,11 +53,6 @@ public class DailyPlan {
 	public void addToDo(ToDo todo) {
 		toDos.add(todo);
 		todo.setDailyPlan(this);
-	}
-
-	public void addComment(Comment comment) {
-		comments.add(comment);
-		comment.setDailyPlan(this);
 	}
 
 	public void fillExams(Set<Exam> exams) {

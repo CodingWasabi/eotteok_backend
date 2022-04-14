@@ -1,5 +1,7 @@
 package com.codingwasabi.howtodo.web.comment.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,12 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
-import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -26,17 +27,25 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Account account;
 
-	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
-	private DailyPlan dailyPlan;
+	private Calendar calendar;
+
+	private LocalDate date;
 
 	private int profileNumber;
+
 	private String body;
 
 	@Builder
-	private Comment(Account account, int profileNumber, String body) {
+	private Comment(Account account, Calendar calendar, int profileNumber, String body, LocalDate date) {
 		this.account = account;
+		this.calendar = calendar;
 		this.profileNumber = profileNumber;
 		this.body = body;
+		this.date = date;
+	}
+
+	public boolean isDate(LocalDate date) {
+		return this.date.isEqual(date);
 	}
 }

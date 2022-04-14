@@ -12,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
-import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 import com.codingwasabi.howtodo.web.todo.entity.ToDo;
@@ -50,19 +49,6 @@ public class DailyPlanTest {
 
 		// then
 		assertThat(dailyPlan.getToDos()).containsOnly(todo);
-	}
-
-	@DisplayName("댓글 추가")
-	@Test
-	void 댓글_추가() {
-		// given
-		Comment comment = Comment_생성();
-
-		// when
-		dailyPlan.addComment(comment);
-
-		// then
-		assertThat(dailyPlan.getComments()).containsOnly(comment);
 	}
 
 	@DisplayName("중복되지 않게 과목 채우기")

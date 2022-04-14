@@ -1,5 +1,6 @@
 package com.codingwasabi.howtodo.web.calendar.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 
@@ -37,6 +39,9 @@ public class Calendar {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Account account;
 
+	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comment> comments = new ArrayList<>();
+
 	public Calendar(Account account) {
 		this.account = account;
 	}
@@ -44,6 +49,10 @@ public class Calendar {
 	public void addPlan(DailyPlan dailyPlan) {
 		dailyPlans.add(dailyPlan);
 		dailyPlan.setCalendar(this);
+	}
+
+	public void addComment(Comment comment) {
+		comments.add(comment);
 	}
 
 	public Set<Exam> getExams() {
@@ -67,5 +76,16 @@ public class Calendar {
 		});
 
 		return monthPlans;
+	}
+
+	public int getCommentCount() {
+		return comments.size();
+	}
+
+	public int getCommentCount(DailyPlan dailyPlan) {
+		LocalDate date = dailyPlan.getDate();
+		return (int)comments.stream()
+							.filter(comment -> comment.isDate(date))
+							.count();
 	}
 }
