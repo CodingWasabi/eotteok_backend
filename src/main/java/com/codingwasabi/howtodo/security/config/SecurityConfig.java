@@ -29,6 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 			.authorizeRequests()
 			.mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+			.mvcMatchers(HttpMethod.POST, "/**").permitAll()
+			.mvcMatchers(HttpMethod.GET, "/**").permitAll()
+			.mvcMatchers(HttpMethod.PUT, "/**").permitAll()
 			.anyRequest()
 			.permitAll()
 
