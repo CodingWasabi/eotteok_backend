@@ -29,6 +29,7 @@ import com.codingwasabi.howtodo.web.calendar.service.CalendarService;
 import com.codingwasabi.howtodo.web.exam.ExamService;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
 import com.codingwasabi.howtodo.web.policy.tendency.TendencyPolicy;
+import com.sun.jdi.request.DuplicateRequestException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,7 +49,7 @@ public class CalendarController {
 		examService.insertColor(exams);
 
 		if (!account.isAnonymous() && calendarService.alreadyExist(account)) {
-			throw new IllegalStateException("user already has calendar date, need initialize");
+			throw new DuplicateRequestException("user already has calendar date, need initialize");
 		}
 
 		int tendency = tendencyPolicy.setUp(createCalendarRequest.getAnswers(),
