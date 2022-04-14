@@ -78,8 +78,10 @@ public class Calendar {
 		return monthPlans;
 	}
 
-	public int getCommentCount() {
-		return comments.size();
+	public int getCommentCount(int month) {
+		return (int)comments.stream()
+							.filter(comment -> comment.isMonth(month))
+							.count();
 	}
 
 	public int getCommentCount(DailyPlan dailyPlan) {

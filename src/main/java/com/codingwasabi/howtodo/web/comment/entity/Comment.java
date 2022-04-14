@@ -48,4 +48,8 @@ public class Comment {
 	public boolean isDate(LocalDate date) {
 		return this.date.isEqual(date);
 	}
+
+	public boolean isMonth(int month) {
+		return date.getMonthValue() == month;
+	}
 }

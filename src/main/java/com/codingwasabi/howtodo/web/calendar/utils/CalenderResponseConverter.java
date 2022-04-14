@@ -37,7 +37,7 @@ public class CalenderResponseConverter {
 				.entrySet()
 				.forEach(entry -> {
 					monthToDoInfos.add(new CalendarResponse.MonthToDoInfo(entry.getKey(),
-																		  calendar.getCommentCount(),
+																		  calendar.getCommentCount(entry.getKey()),
 																		  getDailyCommentsCount(calendar),
 																		  getDailyToDoInfoList(calendar,
 																							   entry.getValue())));
