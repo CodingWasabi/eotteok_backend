@@ -97,4 +97,8 @@ public class Calendar {
 					   .filter(comment -> comment.isMonth(month))
 					   .collect(Collectors.toList());
 	}
+
+	public void resetPlans() {
+		this.dailyPlans.clear();
+	}
 }

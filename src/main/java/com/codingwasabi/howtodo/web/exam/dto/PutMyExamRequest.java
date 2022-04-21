@@ -26,7 +26,7 @@ public class PutMyExamRequest {
 	public static class ExamRequest {
 		private String name;
 		
-		@JsonFormat(pattern = "yyyy/MM/dd hh:mm")
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm")
 		private LocalDateTime date;
 		
 		private int prepareTime;

@@ -32,6 +32,11 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	@Transactional
 	public Calendar create(Account account, int tendency, String nickname, int dailyQuota, List<Exam> exams) {
+		if (!account.isAnonymous()) {
+			calendarRepository.findByAccount(account)
+							  .ifPresentOrElse(calendar -> calendarRepository.delete(calendar), () -> {});
+		}
+
 		Calendar calendar = new Calendar(account);
 		List<DailyPlan> dailyPlans = addDailyPlans(account, exams, calendar, dailyQuota);
 

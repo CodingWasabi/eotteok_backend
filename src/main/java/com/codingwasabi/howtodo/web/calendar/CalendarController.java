@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,8 @@ public class CalendarController {
 	private final AccountService accountService;
 	private final ExamService examService;
 	private final TendencyPolicy tendencyPolicy;
+	@Value("${oauth.redirect-uri}")
+	private String REDIRECT_URI;
 
 	@PostMapping(value = "/calendar", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<CalendarResponse> createCalendar(@LoginAccount Account account,
@@ -132,7 +135,7 @@ public class CalendarController {
 
 	@RequestMapping("/redirect")
 	public ResponseEntity<Void> redirect() throws URISyntaxException {
-		URI redirectUri = new URI("http://3.34.94.220:3000/loading");
+		URI redirectUri = new URI(REDIRECT_URI);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(redirectUri);
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);

@@ -4,11 +4,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    
+
 server:
   servlet:
     session:
-      timeout: 15m
+      timeout: 60m
       cookie:
         http-only: true
         # secure: true
