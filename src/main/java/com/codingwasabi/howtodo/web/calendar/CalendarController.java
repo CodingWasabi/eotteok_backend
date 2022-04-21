@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -134,9 +136,10 @@ public class CalendarController {
 	}
 
 	@RequestMapping("/redirect")
-	public ResponseEntity<Void> redirect() throws URISyntaxException {
+	public ResponseEntity<Void> redirect(HttpServletRequest httpServletRequest) throws URISyntaxException {
 		URI redirectUri = new URI(REDIRECT_URI);
 		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.set(httpServletRequest.getCookies()[0].getName(), httpServletRequest.getCookies()[0].getValue());
 		httpHeaders.setLocation(redirectUri);
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 	}
