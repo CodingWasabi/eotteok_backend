@@ -3,16 +3,15 @@ package com.codingwasabi.howtodo.web.calendar;
 import static com.codingwasabi.howtodo.web.calendar.utils.CalenderResponseConverter.*;
 import static org.springframework.http.MediaType.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -136,11 +135,10 @@ public class CalendarController {
 	}
 
 	@RequestMapping("/redirect")
-	public ResponseEntity<Void> redirect(HttpServletRequest httpServletRequest) throws URISyntaxException {
-		URI redirectUri = new URI(REDIRECT_URI);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.set(httpServletRequest.getCookies()[0].getName(), httpServletRequest.getCookies()[0].getValue());
-		httpHeaders.setLocation(redirectUri);
-		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+	public ResponseEntity<Void> redirect(HttpServletRequest httpServletRequest,
+										 HttpServletResponse httpServletResponse) throws IOException {
+		httpServletResponse.addCookie(httpServletRequest.getCookies()[0]);
+		httpServletResponse.sendRedirect(REDIRECT_URI);
+		return new ResponseEntity<>(HttpStatus.SEE_OTHER);
 	}
 }
