@@ -47,9 +47,9 @@ public class EntityFactory {
 				   .build();
 	}
 
-	public static Comment Comment_생성() {
+	public static Comment Comment_생성(Account account) {
 		return Comment.builder()
-					  .account(Account_생성())
+					  .account(account)
 					  .profileNumber(3)
 					  .body("댓글")
 					  .build();
@@ -67,5 +67,9 @@ public class EntityFactory {
 						.account(account)
 						.date(LocalDate.of(year, month, day))
 						.build();
+	}
+
+	public static Calendar Calendar_생성(Account account) {
+		return new Calendar(account);
 	}
 }
