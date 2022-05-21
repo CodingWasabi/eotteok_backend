@@ -28,7 +28,8 @@ public class CalendarServiceTest extends ServiceUnitTest {
 		this.calendarService = new CalendarServiceImpl(calendarRepository,
 													   examRepository,
 													   dailyPlanRepository,
-													   planMakingPolicy);
+													   planMakingPolicy,
+														accountRepository);
 	}
 
 	@DisplayName("비회원 Calender 생성 로직")

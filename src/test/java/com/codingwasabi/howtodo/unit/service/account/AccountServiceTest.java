@@ -21,7 +21,7 @@ public class AccountServiceTest extends ServiceUnitTest {
 
 	@BeforeEach
 	void init() {
-		accountService = new AccountServiceImpl(accountRepository);
+		accountService = new AccountServiceImpl(accountRepository, calendarRepository);
 	}
 
 	@DisplayName("id로 account 찾기")
