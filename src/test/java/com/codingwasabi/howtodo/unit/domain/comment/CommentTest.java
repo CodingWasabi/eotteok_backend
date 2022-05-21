@@ -2,6 +2,7 @@ package com.codingwasabi.howtodo.unit.domain.comment;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,22 +10,127 @@ import com.codingwasabi.howtodo.unit.utils.EntityFactory;
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 
-@DisplayName("Comment, 도메인 단위 테스트")
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+@DisplayName("Comment : Entity 단위 테스트")
 public class CommentTest {
-	@DisplayName("Comment 인스턴스 생성")
-	@Test
-	void Comment_생성() {
-		// given
-		Account account = EntityFactory.Account_생성();
 
-		// when
-		Comment comment = Comment.builder()
-								 .account(account)
-								 .body("테스트 댓글")
-								 .profileNumber(3)
-								 .build();
+    @Test
+    void 정상_builder_인스턴스생성() {
+        // given
+        Account account = EntityFactory.Account_생성();
+        Calendar calendar = new Calendar(account);
+        String body = "테스트 댓글";
+		LocalDate date = LocalDate.of(2022, 5, 20);
+        int profileNumber = 3;
 
-		// then
-		assertThat(comment.getBody()).isEqualTo("테스트 댓글");
-	}
+        // when
+        Comment comment = Comment.builder()
+                .account(account)
+                .calendar(calendar)
+                .body(body)
+				.date(date)
+                .profileNumber(profileNumber)
+                .build();
+
+        // then
+        assertThat(comment.getAccount()).isEqualTo(account);
+		assertThat(comment.getCalendar()).isEqualTo(calendar);
+		assertThat(comment.getDate()).isEqualTo(date);
+        assertThat(comment.getBody()).isEqualTo(body);
+        assertThat(comment.getProfileNumber()).isEqualTo(profileNumber);
+    }
+
+    @Test
+    void 정상_isDate_같은date_true() {
+        // Given
+        Account account = EntityFactory.Account_생성();
+        Calendar calendar = new Calendar(account);
+        String body = "테스트 댓글";
+        LocalDate date = LocalDate.of(2022, 5, 20);
+        int profileNumber = 3;
+
+        // When
+        Comment comment = Comment.builder()
+                .account(account)
+                .calendar(calendar)
+                .body(body)
+                .date(date)
+                .profileNumber(profileNumber)
+                .build();
+
+
+        // Then
+        assertThat(comment.isDate(date)).isTrue();
+    }
+
+    @Test
+    void 정상_isDate_같은date_false() {
+        // Given
+        Account account = EntityFactory.Account_생성();
+        Calendar calendar = new Calendar(account);
+        String body = "테스트 댓글";
+        LocalDate date = LocalDate.of(2022, 5, 20);
+        int profileNumber = 3;
+
+        // When
+        Comment comment = Comment.builder()
+                .account(account)
+                .calendar(calendar)
+                .body(body)
+                .date(date)
+                .profileNumber(profileNumber)
+                .build();
+
+
+        // Then
+        assertThat(comment.isDate(date.plus(1, ChronoUnit.DAYS))).isFalse();
+    }
+
+    @Test
+    void 정상_isMonth_같은month_true() {
+        // Given
+        Account account = EntityFactory.Account_생성();
+        Calendar calendar = new Calendar(account);
+        String body = "테스트 댓글";
+        LocalDate date = LocalDate.of(2022, 5, 20);
+        int profileNumber = 3;
+
+        // When
+        Comment comment = Comment.builder()
+                .account(account)
+                .calendar(calendar)
+                .body(body)
+                .date(date)
+                .profileNumber(profileNumber)
+                .build();
+
+
+        // Then
+        assertThat(comment.isMonth(date.getMonthValue())).isTrue();
+    }
+
+    @Test
+    void 정상_isMonth_다른month_false() {
+        // Given
+        Account account = EntityFactory.Account_생성();
+        Calendar calendar = new Calendar(account);
+        String body = "테스트 댓글";
+        LocalDate date = LocalDate.of(2022, 5, 20);
+        int profileNumber = 3;
+
+        // When
+        Comment comment = Comment.builder()
+                .account(account)
+                .calendar(calendar)
+                .body(body)
+                .date(date)
+                .profileNumber(profileNumber)
+                .build();
+
+
+        // Then
+        assertThat(comment.isMonth(date.plus(1, ChronoUnit.MONTHS).getMonthValue())).isFalse();
+    }
 }

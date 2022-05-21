@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 import com.codingwasabi.howtodo.web.comment.entity.Comment;
 import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 import com.codingwasabi.howtodo.web.exam.entity.Exam;
