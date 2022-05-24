@@ -1,5 +1,6 @@
 package com.codingwasabi.howtodo.unit.domain.comment;
 
+import static com.codingwasabi.howtodo.unit.utils.EntityFactory.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
@@ -19,7 +20,7 @@ public class CommentTest {
     @Test
     void 정상_builder_인스턴스생성() {
         // given
-        Account account = EntityFactory.Account_생성();
+        Account account = Account_생성();
         Calendar calendar = new Calendar(account);
         String body = "테스트 댓글";
 		LocalDate date = LocalDate.of(2022, 5, 20);
@@ -45,13 +46,12 @@ public class CommentTest {
     @Test
     void 정상_isDate_같은date_true() {
         // Given
-        Account account = EntityFactory.Account_생성();
+        Account account = Account_생성();
         Calendar calendar = new Calendar(account);
         String body = "테스트 댓글";
         LocalDate date = LocalDate.of(2022, 5, 20);
         int profileNumber = 3;
 
-        // When
         Comment comment = Comment.builder()
                 .account(account)
                 .calendar(calendar)
@@ -60,21 +60,22 @@ public class CommentTest {
                 .profileNumber(profileNumber)
                 .build();
 
+        // When
+        boolean result = comment.isDate(date);
 
         // Then
-        assertThat(comment.isDate(date)).isTrue();
+        assertThat(result).isTrue();
     }
 
     @Test
     void 정상_isDate_같은date_false() {
         // Given
-        Account account = EntityFactory.Account_생성();
+        Account account = Account_생성();
         Calendar calendar = new Calendar(account);
         String body = "테스트 댓글";
         LocalDate date = LocalDate.of(2022, 5, 20);
         int profileNumber = 3;
 
-        // When
         Comment comment = Comment.builder()
                 .account(account)
                 .calendar(calendar)
@@ -83,21 +84,22 @@ public class CommentTest {
                 .profileNumber(profileNumber)
                 .build();
 
+        // When
+        boolean result = comment.isDate(date.plus(1, ChronoUnit.DAYS));
 
         // Then
-        assertThat(comment.isDate(date.plus(1, ChronoUnit.DAYS))).isFalse();
+        assertThat(result).isFalse();
     }
 
     @Test
     void 정상_isMonth_같은month_true() {
         // Given
-        Account account = EntityFactory.Account_생성();
+        Account account = Account_생성();
         Calendar calendar = new Calendar(account);
         String body = "테스트 댓글";
         LocalDate date = LocalDate.of(2022, 5, 20);
         int profileNumber = 3;
 
-        // When
         Comment comment = Comment.builder()
                 .account(account)
                 .calendar(calendar)
@@ -106,21 +108,22 @@ public class CommentTest {
                 .profileNumber(profileNumber)
                 .build();
 
+        // When
+        boolean result = comment.isMonth(date.getMonthValue());
 
         // Then
-        assertThat(comment.isMonth(date.getMonthValue())).isTrue();
+        assertThat(result).isTrue();
     }
 
     @Test
     void 정상_isMonth_다른month_false() {
         // Given
-        Account account = EntityFactory.Account_생성();
+        Account account = Account_생성();
         Calendar calendar = new Calendar(account);
         String body = "테스트 댓글";
         LocalDate date = LocalDate.of(2022, 5, 20);
         int profileNumber = 3;
 
-        // When
         Comment comment = Comment.builder()
                 .account(account)
                 .calendar(calendar)
@@ -129,8 +132,10 @@ public class CommentTest {
                 .profileNumber(profileNumber)
                 .build();
 
+        // When
+        boolean result = comment.isMonth(date.plus(1, ChronoUnit.MONTHS).getMonthValue());
 
         // Then
-        assertThat(comment.isMonth(date.plus(1, ChronoUnit.MONTHS).getMonthValue())).isFalse();
+        assertThat(result).isFalse();
     }
 }
