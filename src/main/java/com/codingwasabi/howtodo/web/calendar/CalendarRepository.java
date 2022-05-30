@@ -13,11 +13,7 @@ import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
 	Optional<Calendar> findByAccount(Account account);
 
-
-	@Modifying
-	@Transactional
-	@Query("delete from Calendar c where c.account.id=:accountId")
-	void deleteByAccountId(Long accountId);
+	void deleteByAccount(Account account);
 
 	boolean existsByAccount(Account account);
 

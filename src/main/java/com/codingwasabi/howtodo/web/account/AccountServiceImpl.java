@@ -29,6 +29,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void reset(Account account) {
-		calendarRepository.deleteByAccountId(account.getId());
+		calendarRepository.findByAccount(account)
+						  .ifPresent(c -> calendarRepository.deleteById(c.getId()));
 	}
 }
