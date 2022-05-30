@@ -29,12 +29,12 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void reset(Account account) {
+		accountRepository.save(account);
 		calendarRepository.findByAccount(account)
 						  .ifPresent(c -> {
 							  calendarRepository.deleteById(c.getId());
 							  System.out.println("removed");
 						  });
 		account.init();
-		accountRepository.save(account);
 	}
 }
