@@ -5,8 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.codingwasabi.howtodo.web.account.entity.Account;
 import com.codingwasabi.howtodo.web.calendar.CalendarRepository;
-import com.codingwasabi.howtodo.web.dailyplan.DailyPlanRepository;
-import com.codingwasabi.howtodo.web.dailyplan.entity.DailyPlan;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +29,6 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void reset(Account account) {
-		calendarRepository.deleteByAccount(account);
-		accountRepository.save(account);
+		calendarRepository.deleteByAccountId(account.getId());
 	}
 }
