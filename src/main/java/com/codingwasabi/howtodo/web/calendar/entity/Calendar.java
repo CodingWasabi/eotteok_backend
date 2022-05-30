@@ -37,7 +37,7 @@ public class Calendar {
 	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DailyPlan> dailyPlans = new ArrayList<>();
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Account account;
 
 	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL, orphanRemoval = true)
