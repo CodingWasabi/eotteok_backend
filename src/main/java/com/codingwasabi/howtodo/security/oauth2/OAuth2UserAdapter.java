@@ -29,7 +29,10 @@ public class OAuth2UserAdapter extends DefaultOAuth2User implements UserDetails 
 
 	@Override
 	public String getUsername() {
-		return account.getEmail();
+		if(account.getEmail() != null) {
+			return account.getEmail();
+		}
+		return account.getProvider() + account.getOauthId();
 	}
 
 	@Override
