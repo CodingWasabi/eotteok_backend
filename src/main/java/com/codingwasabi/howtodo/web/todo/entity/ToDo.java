@@ -29,7 +29,7 @@ public class ToDo {
 
 	private double hour;
 
-	@OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.REMOVE)
+	@OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	private Exam exam;
 
 	@Setter

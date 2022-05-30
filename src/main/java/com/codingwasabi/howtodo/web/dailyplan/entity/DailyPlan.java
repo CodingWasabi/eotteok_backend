@@ -41,7 +41,7 @@ public class DailyPlan {
 	private List<ToDo> toDos = new ArrayList<>();
 
 	@Setter
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Calendar calendar;
 
 	@Builder

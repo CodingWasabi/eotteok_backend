@@ -2,12 +2,17 @@ package com.codingwasabi.howtodo.web.account.entity;
 
 import static com.codingwasabi.howtodo.web.account.entity.Authority.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.codingwasabi.howtodo.web.calendar.entity.Calendar;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +35,9 @@ public class Account {
 
 	@Enumerated(EnumType.STRING)
 	private Authority authority;
+
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	private Calendar calendar;
 
 	// oauth information
 	private Long oauthId;
@@ -58,5 +66,11 @@ public class Account {
 
 	public boolean isAnonymous() {
 		return authority.equals(ANONYMOUS);
+	}
+
+	public void init() {
+		tendency = 0;
+		dailyQuota = 0;
+		calendar = null;
 	}
 }

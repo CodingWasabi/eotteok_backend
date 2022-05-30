@@ -2,6 +2,7 @@ package com.codingwasabi.howtodo.web.comment.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Account account;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Calendar calendar;
 
 	private LocalDate date;
