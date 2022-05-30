@@ -32,5 +32,6 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void reset(Account account) {
 		calendarRepository.deleteByAccount(account);
+		accountRepository.save(account);
 	}
 }
