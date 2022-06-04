@@ -34,8 +34,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+
 	// AWS
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+	// Guava
+	implementation 'com.google.guava:guava:31.1-jre'
+
+	// RestAssured
+	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 }
 
 tasks.named('test') {

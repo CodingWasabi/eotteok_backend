@@ -35,3 +35,4 @@ out/
 
 ### env yml ###
 *-env.yml
+src/main/resources/application-test.yml
